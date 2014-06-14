@@ -143,7 +143,7 @@ function fax_install(){
 	rpm -ivh hylafax-*
 
 	if [ ! -e ./iaxmodem-1.2.0.tar.gz ]; then
-		wget http://sourceforge.net/projects/iaxmodem/files/latest/download?source=files -O iaxmodem-1.2.0.tar.gz
+		wget http://www.kazoo.com.cn/UCServerCC/iaxmodem-1.2.0.tar.gz -O iaxmodem-1.2.0.tar.gz
 	fi
 	tar zxf iaxmodem-1.2.0.tar.gz
 	cd iaxmodem-1.2.0
