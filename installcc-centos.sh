@@ -219,8 +219,8 @@ function mpg123_install(){
 	if [ ! -e ./mpg123-$mpg123ver.tar.bz2 ]; then
 		wget http://www.kazoo.com.cn/UCServerCC/mpg123-1.13.4.tar.bz2 -O mpg123-1.13.4.tar.bz2
 	fi
-	tar jxf mpg123-$mpg123ver.tar.bz2
-	cd mpg123-$mpg123ver
+	tar jxf mpg123-1.13.4.tar.bz2
+	cd mpg123-1.13.4
 	./configure
 	make
 	make install
