@@ -217,7 +217,7 @@ function mpg123_install(){
 	echo -e "\e[32mStarting Install MPG123\e[m"
 	cd /usr/src
 	if [ ! -e ./mpg123-$mpg123ver.tar.bz2 ]; then
-		wget http://sourceforge.net/projects/mpg123/files/mpg123/$mpg123ver/mpg123-$mpg123ver.tar.bz2/download -O mpg123-$mpg123ver.tar.bz2
+		wget http://www.kazoo.com.cn/UCServerCC/mpg123-1.13.4.tar.bz2 -O mpg123-1.13.4.tar.bz2
 	fi
 	tar jxf mpg123-$mpg123ver.tar.bz2
 	cd mpg123-$mpg123ver
