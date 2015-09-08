@@ -636,7 +636,7 @@ function iptables_config(){
 	service iptables restart
 }
 
-funtion UI() {
+function UI() {
 	echo "Start setting UCServer UI"
 	wget http://downcc.ucserver.org:8082/Files/UCS-UI.tar.gz
 	wget http://downcc.ucserver.org:8082/Files/update.sh
