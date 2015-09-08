@@ -566,7 +566,21 @@ function astercc_install() {
 }
 
 function set_ami(){
-	amipw = ucserverCC
+	while true;do
+		echo -e "\e[32mplease give an AMI user\e[m";
+		read amiu;
+		if [ "X${amiu}" != "X" ]; then
+			break;
+		fi
+	done
+
+	while true;do
+		echo -e "\e[32mplease give an AMI secret\e[m";
+		read amipw;
+		if [ "X${amipw}" != "X" ]; then
+			break;
+		fi
+	done
 cat > /etc/asterisk/manager.conf << EOF
 [general]
 enabled = yes
@@ -586,6 +600,7 @@ EOF
 
 	echo amiu=$amiu >> /tmp/.mysql_root_pw.$$
 	echo amipw=$amipw >> /tmp/.mysql_root_pw.$$
+
 }
 
 function get_mysql_passwd(){
