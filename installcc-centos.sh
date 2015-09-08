@@ -86,7 +86,7 @@ function php_install(){
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
-	yum -y install php54-fpm php54-pecl-apc pcre-devel php54-mysql sox php54-gd php54-mbstring php54-ioncube-loader
+	yum -y install php54-fpm php54-cli pcre-devel php54-mysql sox php54-gd php54-mbstring php54-ioncube-loader
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 20M /" /etc/php.ini 
@@ -143,7 +143,7 @@ function fax_install(){
 	rpm -ivh hylafax-*
 
 	if [ ! -e ./iaxmodem-1.2.0.tar.gz ]; then
-		wget http://www.kazoo.com.cn/UCServerCC/iaxmodem-1.2.0.tar.gz -O iaxmodem-1.2.0.tar.gz
+		wget http://sourceforge.net/projects/iaxmodem/files/latest/download?source=files -O iaxmodem-1.2.0.tar.gz
 	fi
 	tar zxf iaxmodem-1.2.0.tar.gz
 	cd iaxmodem-1.2.0
@@ -217,10 +217,10 @@ function mpg123_install(){
 	echo -e "\e[32mStarting Install MPG123\e[m"
 	cd /usr/src
 	if [ ! -e ./mpg123-$mpg123ver.tar.bz2 ]; then
-		wget http://www.kazoo.com.cn/UCServerCC/mpg123-1.13.4.tar.bz2 -O mpg123-1.13.4.tar.bz2
+		wget http://sourceforge.net/projects/mpg123/files/mpg123/$mpg123ver/mpg123-$mpg123ver.tar.bz2/download -O mpg123-$mpg123ver.tar.bz2
 	fi
-	tar jxf mpg123-1.13.4.tar.bz2
-	cd mpg123-1.13.4
+	tar jxf mpg123-$mpg123ver.tar.bz2
+	cd mpg123-$mpg123ver
 	./configure
 	make
 	make install
@@ -356,7 +356,7 @@ function lame_install(){
 	echo -e "\e[32mStarting Install Lame for mp3 monitor\e[m"
 	cd /usr/src
 	if [ ! -e ./lame-3.99.5.tar.gz ]; then
-    wget http://www.kazoo.com.cn/UCServerCC/lame-3.99.5.tar.gz -O lame-3.99.5.tar.gz
+    wget http://sourceforge.net/projects/lame/files/lame/3.99/lame-3.99.5.tar.gz/download -O lame-3.99.5.tar.gz
 	fi
 	tar zxf lame-3.99.5.tar.gz
 	if [ $? != 0 ]; then
