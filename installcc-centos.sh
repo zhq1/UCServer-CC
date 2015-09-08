@@ -636,6 +636,12 @@ function iptables_config(){
 	service iptables restart
 }
 
+funtion UI() {
+	echo "Start setting UCServer UI"
+	wget http://downcc.ucserver.org:8082/Files/UCS-UI.tar.gz
+	wget http://downcc.ucserver.org:8082/Files/update.sh
+	bash ./upgrade.sh
+}
 
 function run() {
 
@@ -672,6 +678,7 @@ function run() {
 	astercc_install
 	nginx_conf_install
 	iptables_config
+	UI
 	echo "asterisk ALL = NOPASSWD :/etc/init.d/asterisk" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /usr/bin/reboot" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
