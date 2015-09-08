@@ -5,7 +5,7 @@
 # By Solo #### solo@astercc.org last modify 2013-02-06 for asterCC 1.2-beta
 # By Solo #### solo@astercc.org last modify 2013-05-20, 修正了asterisk总是使用asterccuser asterccsecret作为AMI用户的bug
 # By Solo #### solo@astercc.org last modify 2014-02-07, 禁用了netjet dahdi驱动
-
+# By Bob  #### 改为UCServer UI，更新自2015年9月8日
 #downloadmirror=http://download1.astercc.org
 
 #downloadmirror=http://astercc.org/download
@@ -636,9 +636,6 @@ function iptables_config(){
 	service iptables restart
 }
 
-function CCUI() {
-	
-}
 
 function run() {
 
@@ -648,7 +645,7 @@ function run() {
 	echo "1: China Server (China Mobile)"
 	read downloadserver;
 	if [ "$downloadserver" == "1"  ]; then
-		downloadmirror=http://downcc.ucserver.org:8082;
+		downloadmirror=http://downcc.ucserver.org:8082/Files;
 	fi
 
 	wget $downloadmirror/ucservercc1 -t 5
