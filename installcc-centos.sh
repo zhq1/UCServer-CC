@@ -638,10 +638,12 @@ function iptables_config(){
 }
 
 function UI() {
+	mkdir -p /usr/src/UI
+	cd /usr/src/UI
 	echo "Start setting UCServer UI"
 	wget http://downcc.ucserver.org:8082/Files/UCS-UI.tar.gz
 	wget http://downcc.ucserver.org:8082/Files/update.sh
-	bash ./upgrade.sh
+	bash /usr/src/UI/upgrade.sh
 }
 
 function run() {
