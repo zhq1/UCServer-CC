@@ -566,21 +566,7 @@ function astercc_install() {
 }
 
 function set_ami(){
-	while true;do
-		echo -e "\e[32mplease give an AMI user\e[m";
-		read amiu;
-		if [ "X${amiu}" != "X" ]; then
-			break;
-		fi
-	done
-
-	while true;do
-		echo -e "\e[32mplease give an AMI secret\e[m";
-		read amipw;
-		if [ "X${amipw}" != "X" ]; then
-			break;
-		fi
-	done
+	amipw = ucserverCC
 cat > /etc/asterisk/manager.conf << EOF
 [general]
 enabled = yes
