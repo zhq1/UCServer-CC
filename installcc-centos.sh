@@ -636,6 +636,10 @@ function iptables_config(){
 	service iptables restart
 }
 
+function CCUI() {
+	
+}
+
 function run() {
 
 	downloadmirror=http://download1.astercc.org
