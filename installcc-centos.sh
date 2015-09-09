@@ -28,7 +28,7 @@ function newRepo_install(){
 		fi;
 
 		rpm -ivh epel-release-$epelver6.noarch.rpm ius-release-$iusver6.ius.el6.noarch.rpm;
-		if [ ! -e ./percona-release-0.1-3.noarch.rpm]; then
+		if [ ! -e ./percona-release-0.1-3.noarch.rpm ]; then
 			wget http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 		fi;
 		rpm -ivh percona-release-0.1-3.noarch.rpm
