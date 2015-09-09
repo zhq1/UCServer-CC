@@ -28,6 +28,10 @@ function newRepo_install(){
 		fi;
 
 		rpm -ivh epel-release-$epelver6.noarch.rpm ius-release-$iusver6.ius.el6.noarch.rpm;
+		if [ ! -e ./percona-release-0.1-3.noarch.rpm]; then
+			wget http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
+		fi;
+		rpm -ivh percona-release-0.1-3.noarch.rpm
 	else
 		if [ ! -e ./epel-release-$epelver5.noarch.rpm ]; then
 			wget http://dl.iuscommunity.org/pub/ius/archive/Redhat/5/$arch/epel-release-$epelver5.noarch.rpm
@@ -38,12 +42,6 @@ function newRepo_install(){
 		fi;
 
 		rpm -ivh epel-release-$epelver5.noarch.rpm ius-release-$iusver5.ius.el5.noarch.rpm;
-		
-		if [ ! -e ./percona-release-0.1-3.noarch.rpm]; then
-			wget http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
-		fi;
-			rpm -ivh percona-release-0.1-3.noarch.rpm
-
 	fi
 
 	sed -i "s/mirrorlist/#mirrorlist/" /etc/yum.repos.d/ius.repo
