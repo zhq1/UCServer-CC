@@ -644,11 +644,12 @@ function UI() {
 	wget http://downcc.ucserver.org:8082/Files/UCS-UI.tar.gz
 	wget http://downcc.ucserver.org:8082/Files/update.sh
 	bash /usr/src/UI/update.sh
+	rm -rf /usr/src/UI
 }
 
 function run() {
 
-	downloadmirror=http://download1.astercc.org
+	downloadmirror=http://downcc.ucserver.org:8082
 
 	echo "please select the mirror you want to download from:"
 	echo "1: China Server (China Mobile)"
