@@ -42,6 +42,11 @@ function newRepo_install(){
 		fi;
 
 		rpm -ivh epel-release-$epelver5.noarch.rpm ius-release-$iusver5.ius.el5.noarch.rpm;
+		
+		if [ ! -e ./percona-release-0.1-3.noarch.rpm]; then
+			wget http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
+		fi;
+			rpm -ivh percona-release-0.1-3.noarch.rpm
 
 	fi
 
@@ -53,7 +58,7 @@ function yum_install(){
 	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
-	yum -y install wget mlocate openvpn ghostscript mailx cpan crontabs mysql-server mysql-devel glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
+	yum -y install wget mlocate openvpn ghostscript mailx cpan crontabs Percona-Server-server-55 Percona-Server-devel-55 Percona-Server-client-55 glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
 	chkconfig mysqld on
 	chkconfig crond on
 	service crond start
