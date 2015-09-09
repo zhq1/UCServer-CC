@@ -88,8 +88,8 @@ function php_install(){
 	yum -y install php54-fpm php54-cli pcre-devel php54-mysql sox php54-gd php54-mbstring php54-ioncube-loader
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
-	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 20M /" /etc/php.ini 
-	sed -i "s/post_max_size = 8M/post_max_size = 20M/" /etc/php.ini
+	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
+	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /etc/php.ini
 	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
 	sed -i "s/user = apache/user = asterisk/" /etc/php-fpm.d/www.conf
 	sed -i "s/group = apache/group = asterisk/" /etc/php-fpm.d/www.conf
