@@ -643,7 +643,7 @@ function UI() {
 	echo "Start setting UCServer UI"
 	wget http://downcc.ucserver.org:8082/Files/UCS-UI.tar.gz
 	wget http://downcc.ucserver.org:8082/Files/update.sh
-	bash /usr/src/UI/upgrade.sh
+	bash /usr/src/UI/update.sh
 }
 
 function run() {
