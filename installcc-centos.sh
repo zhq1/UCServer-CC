@@ -691,6 +691,7 @@ function run() {
 	ln -s /var/lib/asterisk/moh /var/lib/asterisk/mohmp3
 	/etc/init.d/php-fpm start
 	/etc/init.d/iptables restart
-	echo -e "\e[32masterCC Commercial installation finish!\e[m";
+	echo -e "\e[32mUCServer-CC installation finish!\e[m";
+	echo -e "\e[32mPlease email to xuke@ucserver.cc to get the license!\e[m";
 }
 run
