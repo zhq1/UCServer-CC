@@ -693,5 +693,4 @@ function run() {
 	/etc/init.d/iptables restart
 	echo -e "\e[32masterCC Commercial installation finish!\e[m";
 }
-
 run
