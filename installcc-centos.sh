@@ -604,7 +604,7 @@ EOF
 }
 
 function get_mysql_passwd(){
-	service mysqld start
+	service mysql start
 	while true;do
 		echo -e "\e[32mplease enter your mysql root passwd\e[m";
 		read mysql_passwd;
