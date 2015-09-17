@@ -251,9 +251,9 @@ function dahdi_install() {
 	fi
 	make install
 	make config
-	/usr/sbin/dahdi_genconf
   echo "blacklist netjet" >> /etc/modprobe.d/dahdi.blacklist.conf
 	/etc/init.d/dahdi start
+	/usr/sbin/dahdi_genconf
 	echo -e "\e[32mDAHDI Install OK!\e[m"
 }
 
