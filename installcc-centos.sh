@@ -689,7 +689,7 @@ function run() {
 	/bin/rm -rf /tmp/.mysql_root_pw.$$
 	ln -s /var/lib/asterisk/moh /var/lib/asterisk/mohmp3
 	/etc/init.d/php-fpm start
-	/etc/init.d/iptables restart
+	/etc/init.d/iptables stop
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
