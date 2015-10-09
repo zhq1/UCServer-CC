@@ -646,6 +646,11 @@ function UI() {
 	bash /usr/src/UI/update.sh
 	rm -rf /usr/src/UI
 }
+function MYSQL(){
+	rm -rf /etc/my.cnf
+	wget http://downcc.ucserver.org:8082/Files/my.cnf
+	/etc/init.d/mysql restart
+}
 
 function run() {
 
@@ -683,6 +688,7 @@ function run() {
 	nginx_conf_install
 	iptables_config
 	UI
+	MYSQL
 	echo "asterisk ALL = NOPASSWD :/etc/init.d/asterisk" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /usr/bin/reboot" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
