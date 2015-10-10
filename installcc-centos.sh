@@ -647,6 +647,7 @@ function UI() {
 	rm -rf /usr/src/UI
 }
 function MYSQL(){
+	cd /etc/
 	rm -rf /etc/my.cnf
 	wget http://downcc.ucserver.org:8082/Files/my.cnf
 	/etc/init.d/mysql restart
