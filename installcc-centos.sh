@@ -85,7 +85,7 @@ function php_install(){
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
-	yum -y install php54-fpm php54-cli pcre-devel php54-mysql sox php54-gd php54-mbstring php54-ioncube-loader
+	yum -y install php55u-fpm php55u-cli pcre-devel php55u-mysql sox php55u-gd php55u-mbstring php55u-ioncube-loader
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
