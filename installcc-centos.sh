@@ -52,7 +52,7 @@ function yum_install(){
 	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
-	yum -y install bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs mysql55 mysql55-libs mysql55-server mysql55-devel glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
+	yum -y install bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs Percona-Server-client-55 Percona-Server-server-55 glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
 	chkconfig mysql on
 	chkconfig crond on
 	service crond start
@@ -648,6 +648,7 @@ function UI() {
 }
 function MYSQL(){
 	cd /etc/
+	/etc/init.d/mysql stop
 	rm -rf /etc/my.cnf
 	wget http://downcc.ucserver.org:8082/Files/my.cnf
 	/etc/init.d/mysql restart
