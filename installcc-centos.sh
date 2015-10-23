@@ -647,11 +647,11 @@ function UI() {
 	rm -rf /usr/src/UI
 }
 function MYSQL(){
-	cd /etc/
 	/etc/init.d/mysql stop
 	rm -rf /etc/my.cnf
+	cd /etc/
 	wget http://downcc.ucserver.org:8082/Files/my.cnf
-	/etc/init.d/mysql restart
+	/etc/init.d/mysql start
 }
 
 function run() {
