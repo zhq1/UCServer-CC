@@ -697,6 +697,7 @@ function run() {
 	ln -s /var/lib/asterisk/moh /var/lib/asterisk/mohmp3
 	/etc/init.d/php-fpm start
 	/etc/init.d/iptables stop
+	MYSQL
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
