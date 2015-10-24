@@ -648,6 +648,7 @@ function UI() {
 }
 function MYSQL(){
 	/etc/init.d/mysql stop
+	sleep 15
 	rm -rf /etc/my.cnf
 	cd /etc/
 	wget http://downcc.ucserver.org:8082/Files/my.cnf
