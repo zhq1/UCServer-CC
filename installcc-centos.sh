@@ -359,7 +359,7 @@ function lame_install(){
 	echo -e "\e[32mStarting Install Lame for mp3 monitor\e[m"
 	cd /usr/src
 	if [ ! -e ./lame-3.99.5.tar.gz ]; then
-    	wget $downloadmirror/files/lame-3.99.5.tar.gz -O lame-3.99.5.tar.gz
+    	wget $downloadmirror/lame-3.99.5.tar.gz -O lame-3.99.5.tar.gz
 	fi
 	tar zxf lame-3.99.5.tar.gz
 	if [ $? != 0 ]; then
