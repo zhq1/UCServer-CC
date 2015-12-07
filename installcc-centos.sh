@@ -658,6 +658,12 @@ function MYSQL(){
 function CHANGE_DNS(){
 	echo "dnserver 114.114.114.114">/etc/resolv.conf
 }
+function ADD_COUNTS(){
+	echo "Add counts information"
+	cd /var/www/html
+	wget http://downcc.ucserver.org:8082/Files/count.php
+	wget http://downcc.ucserver.org:8082/Files/clean.php
+}
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
@@ -693,6 +699,7 @@ function run() {
 	nginx_conf_install
 	iptables_config
 	UI
+	ADD_COUNTS
 	echo "asterisk ALL = NOPASSWD :/etc/init.d/asterisk" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /usr/bin/reboot" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
