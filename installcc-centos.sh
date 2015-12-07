@@ -655,6 +655,9 @@ function MYSQL(){
 	/etc/init.d/mysql start
 }
 
+function CHANGE_DNS(){
+	echo "dnserver 114.114.114.114">/etc/resolv.conf
+}
 function run() {
 
 	downloadmirror=http://downcc.ucserver.org:8082
@@ -691,6 +694,7 @@ function run() {
 	nginx_conf_install
 	iptables_config
 	UI
+	CHANGE_DNS
 	echo "asterisk ALL = NOPASSWD :/etc/init.d/asterisk" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /usr/bin/reboot" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
