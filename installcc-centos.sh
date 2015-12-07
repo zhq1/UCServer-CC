@@ -96,7 +96,7 @@ function php_install(){
 	chkconfig php-fpm on
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
-function redis(){
+function redis_install(){
 	yum -y install redis
 	chkconfig --level 2345 redis on
 	echo -e "\e[32Redis server Install OK\e[m"
@@ -690,6 +690,7 @@ function run() {
 	newRepo_install
 	yum_install
 	php_install
+	redis_install
 	fax_install
 	dahdi_install
 	libpri_install
