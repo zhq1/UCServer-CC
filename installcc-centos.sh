@@ -220,7 +220,7 @@ function mpg123_install(){
 	echo -e "\e[32mStarting Install MPG123\e[m"
 	cd /usr/src
 	if [ ! -e ./mpg123-$mpg123ver.tar.bz2 ]; then
-		wget http://sourceforge.net/projects/mpg123/files/mpg123/$mpg123ver/mpg123-$mpg123ver.tar.bz2/download -O mpg123-$mpg123ver.tar.bz2
+		wget $downmirrors/mpg123-$mpg123ver.tar.bz2 -O mpg123-$mpg123ver.tar.bz2
 	fi
 	tar jxf mpg123-$mpg123ver.tar.bz2
 	cd mpg123-$mpg123ver
@@ -382,7 +382,7 @@ function libpri_install() {
 	echo -e "\e[32mStarting Install LibPRI\e[m"
 	cd /usr/src
 	if [ ! -e ./libpri-$libpriver.tar.gz ]; then
-		wget $downloadmirror/files/libpri-$libpriver.tar.gz
+		wget $downloadmirror/libpri-$libpriver.tar.gz
 	fi
 	tar zxf libpri-$libpriver.tar.gz
 	if [ $? != 0 ]; then
