@@ -19,33 +19,23 @@ function newRepo_install(){
 		arch=x86_64
 	fi;
 	if [ "$version" == "release 6" ]; then
-		if [ ! -e ./epel-release-$epelver6.noarch.rpm ]; then
-			wget http://dl.iuscommunity.org/pub/ius/archive/Redhat/6/$arch/epel-release-$epelver6.noarch.rpm
-		fi;
-
-		if [ ! -e ./ius-release-$iusver6.ius.el6.noarch.rpm ]; then
-			wget http://dl.iuscommunity.org/pub/ius/archive/Redhat/6/$arch/ius-release-$iusver6.ius.el6.noarch.rpm
-		fi;
-
-		rpm -ivh epel-release-$epelver6.noarch.rpm ius-release-$iusver6.ius.el6.noarch.rpm;
-		if [ ! -e ./percona-release-0.1-3.noarch.rpm ]; then
-			wget http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
-		fi;
-		rpm -ivh percona-release-0.1-3.noarch.rpm
+		mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+		wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+		mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
+		mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
+		wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo
+		yum makecache
 	else
-		if [ ! -e ./epel-release-$epelver5.noarch.rpm ]; then
-			wget http://dl.iuscommunity.org/pub/ius/archive/Redhat/5/$arch/epel-release-$epelver5.noarch.rpm
-		fi;
-
-		if [ ! -e ./ius-release-$iusver5.ius.el5.noarch.rpm ]; then
-			wget http://dl.iuscommunity.org/pub/ius/archive/Redhat/5/$arch/ius-release-$iusver5.ius.el5.noarch.rpm
-		fi;
-
-		rpm -ivh epel-release-$epelver5.noarch.rpm ius-release-$iusver5.ius.el5.noarch.rpm;
+		mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+		wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo
+		mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
+		mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
+		wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-5.repo
+		yum makecache
 	fi
 
-	sed -i "s/mirrorlist/#mirrorlist/" /etc/yum.repos.d/ius.repo
-	sed -i "s/#baseurl/baseurl/" /etc/yum.repos.d/ius.repo
+#	sed -i "s/mirrorlist/#mirrorlist/" /etc/yum.repos.d/ius.repo
+#	sed -i "s/#baseurl/baseurl/" /etc/yum.repos.d/ius.repo
 }
 
 function yum_install(){
