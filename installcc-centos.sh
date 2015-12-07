@@ -310,7 +310,7 @@ function asterisk_install() {
 	#shutdown selinux
 	cd /usr/src
 	if [ ! -e ./asterisk-$asteriskver.tar.gz ]; then
-		wget http://downcc.ucserver.org:8082/Files/asterisk-$asteriskver.tar.gz
+		wget $downloadmirrors/asterisk-$asteriskver.tar.gz
 	fi
 	tar zxf asterisk-$asteriskver.tar.gz
 	if [ $? != 0 ]; then
