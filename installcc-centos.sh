@@ -85,7 +85,7 @@ function php_install(){
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
-	yum -y install php55u-fpm php55u-cli pcre-devel php55u-mysql sox php55u-gd php55u-mbstring php55u-ioncube-loader
+	yum -y install php55u-fpm php55u-cli pcre-devel php55u-mysql sox php55u-gd php55u-mbstring php55u-ioncube-loader php55u-pecl-redis
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
@@ -96,7 +96,11 @@ function php_install(){
 	chkconfig php-fpm on
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
-
+function redis(){
+	yum -y install redis
+	chkconfig --level 2345 redis on
+	echo -e "\e[32Redis server Install OK\e[m"
+}
 function fax_install(){
 	echo -e "\e[32mStarting Install FAX\e[m"
   version=`cat /etc/issue|grep -o 'release [0-9]\+'`
