@@ -238,7 +238,7 @@ function dahdi_install() {
 	if [ ! -e ./dahdi-linux-complete-$dahdiver.tar.gz ]; then
 		wget http://downcc.ucserver.org:8082/Files/dahdi-linux-complete-$dahdiver.tar.gz
 		if [ ! -e ./dahdi-linux-complete-$dahdiver.tar.gz ]; then
-			wget http://downcc.ucserver.org:8082/Files/dahdi-linux-complete/releases/dahdi-linux-complete-$dahdiver.tar.gz
+			wget http://downcc.ucserver.org:8082/dahdi-linux-complete-$dahdiver.tar.gz
 		fi
 	fi
 	tar zxf dahdi-linux-complete-$dahdiver.tar.gz
