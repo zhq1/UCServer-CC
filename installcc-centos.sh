@@ -98,6 +98,7 @@ function php_install(){
 }
 function redis_install(){
 	yum -y install redis
+	/etc/init.d/redis start
 	chkconfig --level 2345 redis on
 	echo -e "\e[32Redis server Install OK\e[m"
 }
