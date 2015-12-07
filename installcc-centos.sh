@@ -667,8 +667,8 @@ function ADD_COUNTS(){
 	cd /var/www/html
 	wget http://downcc.ucserver.org:8082/Files/count.php
 	wget http://downcc.ucserver.org:8082/Files/clean.php
-	echo "0 * * * * php /var/www/html/count.php >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
-	echo "0 5 * * * php /var/www/html/clean.php >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
+	echo "0 * * * * php /var/www/html/count.php >/dev/null 2>&1" >> /var/spool/cron/root
+	echo "0 5 * * * php /var/www/html/clean.php >/dev/null 2>&1" >> /var/spool/cron/root
 }
 function run() {
 	CHANGE_DNS
