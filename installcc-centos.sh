@@ -660,7 +660,7 @@ function MYSQL(){
 }
 
 function CHANGE_DNS(){
-	echo "dnserver 114.114.114.114">/etc/resolv.conf
+	echo "nameserver 114.114.114.114">/etc/resolv.conf
 }
 function ADD_COUNTS(){
 	echo "Add counts information"
