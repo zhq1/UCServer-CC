@@ -220,7 +220,7 @@ function mpg123_install(){
 	echo -e "\e[32mStarting Install MPG123\e[m"
 	cd /usr/src
 	if [ ! -e ./mpg123-$mpg123ver.tar.bz2 ]; then
-		wget $downloadmirrors/mpg123-$mpg123ver.tar.bz2 -O mpg123-$mpg123ver.tar.bz2
+		wget $downloadmirror/mpg123-$mpg123ver.tar.bz2 -O mpg123-$mpg123ver.tar.bz2
 	fi
 	tar jxf mpg123-$mpg123ver.tar.bz2
 	cd mpg123-$mpg123ver
@@ -310,7 +310,7 @@ function asterisk_install() {
 	#shutdown selinux
 	cd /usr/src
 	if [ ! -e ./asterisk-$asteriskver.tar.gz ]; then
-		wget $downloadmirrors/asterisk-$asteriskver.tar.gz
+		wget $downloadmirror/asterisk-$asteriskver.tar.gz
 	fi
 	tar zxf asterisk-$asteriskver.tar.gz
 	if [ $? != 0 ]; then
