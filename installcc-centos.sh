@@ -81,7 +81,7 @@ function php_install(){
 	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
 	sed -i "s/user = apache/user = asterisk/" /etc/php-fpm.d/www.conf
 	sed -i "s/group = apache/group = asterisk/" /etc/php-fpm.d/www.conf
-	chkconfig php-fpm on
+	chkconfig php55-php-fpm on
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 function redis_install(){
@@ -702,7 +702,7 @@ function run() {
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
 	/bin/rm -rf /tmp/.mysql_root_pw.$$
 	ln -s /var/lib/asterisk/moh /var/lib/asterisk/mohmp3
-	/etc/init.d/php-fpm start
+	/etc/init.d/php55-php-fpm start
 	/etc/init.d/iptables stop
 	MYSQL
 	/etc/init.d/asterccd restart
