@@ -21,7 +21,7 @@ function newRepo_install(){
 	if [ "$version" == "release 6" ]; then
 		rpm -ivh  http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch.rpm
 		rpm -ivh  http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-		mv /etc/repos.d/remi.repo /etc/repos.d/remi.repo.bak
+		mv /etc/yum.repos.d/remi.repo /etc/yum.repos.d/remi.repo.bak
 		wget $downloadmirrors/remi.repo -O /etc/yum.repos.d/remi.repo
 		rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 		yum-config-manager --disable mysql55-community
