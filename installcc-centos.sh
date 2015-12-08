@@ -19,19 +19,12 @@ function newRepo_install(){
 		arch=x86_64
 	fi;
 	if [ "$version" == "release 6" ]; then
-		mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-		wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
-		mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
-		mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
-		wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo
+		rpm -ivh -y http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-7.noarch.rpm
+		rpm -ivh -y http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 		yum makecache
 	else
-		mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-		wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo
-		mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup
-		mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup
-		wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-5.repo
-		yum makecache
+		echo "Sorry,the UCServer-CC must be installed the Centos 6x"
+		exit 0
 	fi
 
 #	sed -i "s/mirrorlist/#mirrorlist/" /etc/yum.repos.d/ius.repo
