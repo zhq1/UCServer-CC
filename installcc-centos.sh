@@ -52,7 +52,10 @@ function yum_install(){
 	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
-	yum -y install bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs Percona-Server-client-55 Percona-Server-server-55 glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
+	yum -y install bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
+	yum -ivh $downloadmirror/percona/Percona-Server-client-55-5.5.46-rel37.6.el6.x86_64.rpm
+	yum -ivh $downloadmirror/percona/Percona-Server-server-55-5.5.46-rel37.6.el6.x86_64.rpm
+	yum -ivh $downloadmirror/percona/Percona-Server-shared-55-5.5.46-rel37.6.el6.x86_64.rpm
 	chkconfig mysql on
 	chkconfig crond on
 	service crond start
