@@ -641,7 +641,7 @@ function UI() {
 	rm -rf /usr/src/UI
 }
 function MYSQL(){
-	/etc/init.d/mysql stop
+	/etc/init.d/mysqld stop
 	sleep 15
 	rm -rf /etc/my.cnf
 	cd /etc/
