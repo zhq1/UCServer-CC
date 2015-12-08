@@ -74,14 +74,16 @@ function php_install(){
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
+	INIFILE=/opt/remi/php55/root/etc/php.ini
+	WWWFILE=/opt/remi/php55/root/etc/php-fpm.d/www.conf
 	yum -y install php55-php-fpm php55-php-cli pcre-devel php55-php-mysqlnd sox php55-php-gd php55-php-mbstring php55-php-ioncube-loader php55-php-pecl-redis
-	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
-	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
-	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
-	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /etc/php.ini
-	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
-	sed -i "s/user = apache/user = asterisk/" /etc/php-fpm.d/www.conf
-	sed -i "s/group = apache/group = asterisk/" /etc/php-fpm.d/www.conf
+	sed -i "s/short_open_tag = Off/short_open_tag = On/" $INIFILE 
+	sed -i "s/memory_limit = 16M /memory_limit = 128M /" $INIFILE
+	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" $INIFILE
+	sed -i "s/post_max_size = 8M/post_max_size = 40M/" $INIFILE
+	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' $INIFILE
+	sed -i "s/user = apache/user = asterisk/" $WWWFILE
+	sed -i "s/group = apache/group = asterisk/" $WWWFILE
 	chkconfig php55-php-fpm on
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
