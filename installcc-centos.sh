@@ -19,8 +19,8 @@ function newRepo_install(){
 		arch=x86_64
 	fi;
 	if [ "$version" == "release 6" ]; then
-		rpm -ivh -y http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-7.noarch.rpm
-		rpm -ivh -y http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+		rpm -ivh  http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-7.noarch.rpm
+		rpm -ivh  http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 		yum makecache
 	else
 		echo "Sorry,the UCServer-CC must be installed the Centos 6x"
