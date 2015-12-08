@@ -20,8 +20,13 @@ function newRepo_install(){
 	fi;
 	if [ "$version" == "release 6" ]; then
 		rpm -ivh  http://mirrors.aliyun.com/epel/epel-release-latest-6.noarch.rpm
-	#	rpm -ivh  http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-		yum makecache
+		rpm -ivh  http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+		mv /etc/repos.d/remi.repo /etc/repos.d/remi.repo.bak
+		wget $downloadmirrors/remi.repo -O /etc/yum.repos.d/remi.repo
+		rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
+		yum-config-manager --disable mysql55-community
+		yum-config-manager --disable mysql56-community
+		yum-config-manager --enable mysql57-community-dmr
 	else
 		echo "Sorry,the UCServer-CC must be installed the Centos 6x"
 		exit 0
@@ -35,7 +40,7 @@ function yum_install(){
 	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
-	yum -y install bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs Percona-Server-client-55 Percona-Server-server-55 glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
+	yum -y install bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs mysql-community-server glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
 	chkconfig mysql on
 	chkconfig crond on
 	service crond start
