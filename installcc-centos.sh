@@ -25,8 +25,8 @@ function newRepo_install(){
 		wget $downloadmirrors/remi.repo -O /etc/yum.repos.d/remi.repo
 		rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 		yum-config-manager --disable mysql55-community
-		yum-config-manager --disable mysql56-community
-		yum-config-manager --enable mysql57-community-dmr
+		yum-config-manager --enable mysql56-community
+		yum-config-manager --disable mysql57-community-dmr
 	else
 		echo "Sorry,the UCServer-CC must be installed the Centos 6x"
 		exit 0
@@ -41,7 +41,7 @@ function yum_install(){
 	yum -y remove php* 
 	yum -y remove asterisk*
 	yum -y install bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs mysql-community-server glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
-	chkconfig mysql on
+	chkconfig mysqld on
 	chkconfig crond on
 	service crond start
 }
@@ -598,7 +598,7 @@ EOF
 
 function get_mysql_passwd(){
 	mkdir -p /var/run/mysqld
-	service mysql start
+	service mysqld start
 	while true;do
 		echo -e "\e[32mplease enter your mysql root passwd\e[m";
 		read mysql_passwd;
