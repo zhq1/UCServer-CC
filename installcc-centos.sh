@@ -23,7 +23,7 @@ function newRepo_install(){
 		rpm -ivh  http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 		mv /etc/yum.repos.d/remi.repo /etc/yum.repos.d/remi.repo.bak
 	#	cd /etc/yum.repos.d
-		wget -O /etc/yum.repos.d/remi.repo $downloadmirrors/remi.repo
+		wget -O /etc/yum.repos.d/remi.repo $downloadmirror/remi.repo
 		rpm -ivh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 		yum-config-manager --disable mysql55-community
 		yum-config-manager --enable mysql56-community
