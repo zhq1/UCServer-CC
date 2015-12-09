@@ -90,7 +90,11 @@ function php_install(){
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
-	yum -y install php55u-fpm php55u-cli pcre-devel php55u-mysqlnd sox php55u-gd php55u-mbstring php55u-ioncube-loader php55u-pecl-redis
+	yum -y install sox libvpx-devel libXpm-devel t1lib-devel libxslt libxslt-devel unzip
+	cd /usr/src
+	wget $downloadmirror/php/php55u.zip
+	unzip php55u.zip
+	rpm -ivh php55u*.rpm
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
@@ -728,3 +732,4 @@ function run() {
 	echo -e "\e[32mPlease email to xuke@ucserver.cc to get the license!\e[m";
 }
 run
+
