@@ -275,6 +275,7 @@ function nginx_install(){
 	echo -e "\e[32mStarting install nginx\e[m"
 	service httpd stop
 	chkconfig httpd off
+	yum -y install pcre-devel
 	cd /usr/src
 	if [ ! -e ./nginx-$nginxver.tar.gz ]; then
 		wget $downloadmirror/nginx-$nginxver.tar.gz
