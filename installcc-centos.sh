@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Auto install astercc commercial and related packages
-# By Solo #### solo@astercc.org last modify 2012-04-17
-# By Solo #### solo@astercc.org last modify 2013-02-06 for asterCC 1.2-beta
-# By Solo #### solo@astercc.org last modify 2013-05-20, 修正了asterisk总是使用asterccuser asterccsecret作为AMI用户的bug
-# By Solo #### solo@astercc.org last modify 2014-02-07, 禁用了netjet dahdi驱动
 # By Bob  #### 改为UCServer UI，更新自2015年9月8日
 
 # uname -r, 如果包含-pve, 需要到/usr/src执行
