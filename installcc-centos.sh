@@ -116,39 +116,20 @@ function fax_install(){
 	yum -y install libtiff libtiff-devel
 
   bit=`getconf LONG_BIT`
-  if [ $bit == 32 ]; then
-    if [ "$version" == "release 6" ]; then
-  		if [ ! -e ./hylafax-client-6.0.6-1rhel6.i686.rpm ]; then
-        wget ftp://ftp.hylafax.org/binary/linux/redhat/6.0.6/hylafax-client-6.0.6-1rhel6.i686.rpm
-  		fi
-	  	if [ ! -e ./hylafax-server-6.0.6-1rhel6.i686.rpm ]; then
-        wget ftp://ftp.hylafax.org/binary/linux/redhat/6.0.6/hylafax-server-6.0.6-1rhel6.i686.rpm
-  		fi
-    else
-      if [ ! -e ./hylafax-client-6.0.6-1rhel5.i386.rpm ]; then
-        wget ftp://ftp.hylafax.org/binary/linux/redhat/6.0.6/hylafax-client-6.0.6-1rhel5.i386.rpm
-      fi
-      if [ ! -e ./hylafax-server-6.0.6-1rhel5.i386.rpm ]; then
-        wget ftp://ftp.hylafax.org/binary/linux/redhat/6.0.6/hylafax-server-6.0.6-1rhel5.i386.rpm
-      fi
-    fi
-	else
     if [ "$version" == "release 6" ]; then
       if [ ! -e ./hylafax-server-6.0.6-1rhel6.x86_64.rpm ]; then
-        wget ftp://ftp.hylafax.org/binary/linux/redhat/6.0.6/hylafax-server-6.0.6-1rhel6.x86_64.rpm
+        wget $downloadmirror/hylafax-server-6.0.6-1rhel6.x86_64.rpm
       fi
       if [ ! -e ./hylafax-client-6.0.6-1rhel6.x86_64.rpm ]; then
-        wget ftp://ftp.hylafax.org/binary/linux/redhat/6.0.6/hylafax-client-6.0.6-1rhel6.x86_64.rpm
+        wget $downloadmirror/hylafax-server-6.0.6-1rhel6.x86_64.rpm
       fi
-    else
-  		if [ ! -e ./hylafax-server-6.0.6-1rhel5.x86_64.rpm ]; then
-	  		wget ftp://ftp.hylafax.org/binary/linux/redhat/6.0.6/hylafax-server-6.0.6-1rhel5.x86_64.rpm
-  		fi
-	  	if [ ! -e ./hylafax-client-6.0.6-1rhel5.x86_64.rpm ]; then
-		  	wget ftp://ftp.hylafax.org/binary/linux/redhat/6.0.6/hylafax-client-6.0.6-1rhel5.x86_64.rpm
-  		fi
+  	if [ ! -e ./hylafax-server-6.0.6-1rhel5.x86_64.rpm ]; then
+	  		wget $downloadmirror/hylafax-server-6.0.6-1rhel6.x86_64.rpm
+  	fi
+	if [ ! -e ./hylafax-client-6.0.6-1rhel5.x86_64.rpm ]; then
+		  	wget $downloadmirror/hylafax-client-6.0.6-1rhel5.x86_64.rpm
+        fi
     fi
-	fi
 
 	rpm -ivh hylafax-*
 
