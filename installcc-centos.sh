@@ -197,7 +197,6 @@ UUCP_LOCKDIR='/var/lock'
 UUCP_LOCKTYPE='ascii'
 UUENCODE='/usr/bin/uuencode'
 EOF
-
 	echo -e "\e[32mFAX Install OK!\e[m"
 }
 
