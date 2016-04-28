@@ -130,8 +130,8 @@ function fax_install(){
 	if [ ! -e ./iaxmodem-1.2.0.tar.gz ]; then
 		wget http://sourceforge.net/projects/iaxmodem/files/latest/download?source=files -O iaxmodem-1.2.0.tar.gz
 	fi
-	tar zxf iaxmodem-1.2.0.tar.gz
-	cd iaxmodem-1.2.0
+	tar -xvzf iaxmodem-1.2.0.tar.gz
+	cd iaxmodem-1.3.0
 	./configure
 	make
 	cp ./iaxmodem /usr/sbin/
