@@ -135,6 +135,7 @@ function fax_install(){
 	./configure
 	make
 	cp ./iaxmodem /usr/sbin/
+  useradd -u 500 -c "Asterisk PBX" -d /var/lib/asterisk asterisk
   mkdir -p /var/spool/hylafax/bin
   mkdir -p /var/spool/hylafax/etc/
   mkdir -p /var/spool/hylafax/docq/
