@@ -121,7 +121,7 @@ function fax_install(){
         wget $downloadmirror/hylafax-server-6.0.6-1rhel6.x86_64.rpm
       fi
       if [ ! -e ./hylafax-client-6.0.6-1rhel6.x86_64.rpm ]; then
-        wget $downloadmirror/hylafax-server-6.0.6-1rhel6.x86_64.rpm
+        wget $downloadmirror/hylafax-client-6.0.6-1rhel6.x86_64.rpm
       fi
     fi
 
