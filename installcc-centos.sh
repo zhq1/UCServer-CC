@@ -425,7 +425,13 @@ http {
 	push_stream_shared_memory_size  256M;
 	push_stream_message_ttl  15m;
 
-    #gzip  on;
+    gzip  on;
+    gzip_min_length 1k;
+    gzip_buffers 16 64k;
+    gzip_http_version 1.1;
+    gzip_comp_level 6;
+    gzip_types text/plain application/x-javascript text/css application/xml;
+    gzip_vary on;
     server
     {
         listen       80 default;
