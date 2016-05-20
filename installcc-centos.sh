@@ -122,11 +122,10 @@ function fax_install(){
     fi
 
 	rpm -ivh hylafax-*
-
-	if [ ! -e ./iaxmodem-1.2.0.tar.gz ]; then
-		wget http://sourceforge.net/projects/iaxmodem/files/latest/download?source=files -O iaxmodem-1.2.0.tar.gz
+	if [ ! -e ./iaxmodem-1.3.0.tar.gz ]; then
+		wget $downloadmirror/iaxmodem-1.3.0.tar.gz
 	fi
-	tar -xvzf iaxmodem-1.2.0.tar.gz
+	tar -xvzf iaxmodem-1.3.0.tar.gz
 	cd iaxmodem-1.3.0
 	./configure
 	make
