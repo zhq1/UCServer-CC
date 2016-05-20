@@ -5,6 +5,11 @@
 # uname -r, 如果包含-pve, 需要到/usr/src执行
 # ln -s kernels/2.6.18-308.4.1.el5-x86_64/ linux 
 
+CentOS_UPDATE(){
+	yum -y update
+	ln -s /usr/src/kernel/2.6.32-573.26.1.el6.x86_64  /usr/src/kernel/2.6.32-573.el6.x86_64
+}
+
 function newRepo_install(){
 	cd /usr/src
 	version=`cat /etc/issue|grep -o 'release [0-9]\+'`
