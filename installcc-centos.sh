@@ -667,13 +667,12 @@ function run() {
 	if [ "$downloadserver" == "1"  ]; then
 		downloadmirror=http://downcc.ucserver.org:8082/Files;
 	fi
-
+        CentOS_UPDATE
 	wget $downloadmirror/ucservercc1 -t 5
 	if [ ! -e ./ucservercc1 ]; then
 		echo "failed to get version infromation,please try again"
 		exit 1;
 	fi
-	CentOS_UPDATE
 	. ./ucservercc1
 	/bin/rm -rf ./ucservercc1
 	newRepo_install
