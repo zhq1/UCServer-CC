@@ -673,6 +673,7 @@ function run() {
 		echo "failed to get version infromation,please try again"
 		exit 1;
 	fi
+	CentOS_UPDATE
 	. ./ucservercc1
 	/bin/rm -rf ./ucservercc1
 	newRepo_install
