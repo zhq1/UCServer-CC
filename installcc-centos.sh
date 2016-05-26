@@ -99,7 +99,8 @@ function php_install(){
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 function redis_install(){
-	yum -y install redis30u
+	yum -y install jemalloc
+	rpm -ivh $downloadmirror/redis30u-3.0.6-1.ius.el6.x86_64.rpm
 	/etc/init.d/redis start
 	chkconfig --level 2345 redis on
 	echo -e "\e[32Redis server Install OK\e[m"
