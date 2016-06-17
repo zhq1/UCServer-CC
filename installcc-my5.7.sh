@@ -50,7 +50,7 @@ function yum_install(){
         wget  https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.12-5/binary/redhat/6/x86_64/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
         wget  https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.12-5/binary/redhat/6/x86_64/Percona-Server-server-57-5.7.12-5.1.el6.x86_64.rpm
         wget  https://www.percona.com/downloads/Percona-Server-5.7/Percona-Server-5.7.12-5/binary/redhat/6/x86_64/Percona-Server-shared-57-5.7.12-5.1.el6.x86_64.rpm
-	rpm -ivh Percona*.rpm --nodeps --force
+	rpm -ivh Percona*.rpm --nodeps
 	wget $downloadmirror/percona/my1.cnf -O /etc/my.cnf
 #	chkconfig --level 2345 mysql on
 #	chkconfig --level 2345 crond on
@@ -58,16 +58,16 @@ function yum_install(){
 	chkconfig mysql on
 	chkconfig crond on
 	service crond start
-	service start mysql
+	service mysql start
 	mysql -uroot -e "update user set authentication_string=password('') where User='root' and Host='localhost'" mysql
 	mysql -uroot -e "flush privileges"
 	wget $downloadmirror/percona/my2.cnf -O /etc/my.cnf
-	service restart mysql
+	service mysql restart
 	mysql --connect-expired-password -uroot -e "set password = password('')"
 	wget $downloadmirror/percona/mysql.init.d -O /etc/init.d/mysql
 	chmod +x /etc/init.d/mysql
-	service restart mysql
-	service restart crond
+	service mysql restart
+	service crond restart
 
 }
 
