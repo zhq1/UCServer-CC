@@ -50,11 +50,10 @@ function yum_install(){
         wget  $downloadmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
         wget  $downloadmirror/percona/Percona-Server-server-57-5.7.12-5.1.el6.x86_64.rpm
         wget  $downloadmirror/percona/Percona-Server-shared-57-5.7.12-5.1.el6.x86_64.rpm
-	rpm -ivh Percona*.rpm --nodeps
+	rpm -ivh Percona*.rpm
 	wget $downloadmirror/percona/my1.cnf -O /etc/my.cnf
 #	chkconfig --level 2345 mysql on
 #	chkconfig --level 2345 crond on
-	rpm -ivh Percona*.rpm
 	chkconfig mysql on
 	chkconfig crond on
 	service crond start
