@@ -660,8 +660,8 @@ function MYSQL(){
 	sleep 15
 	rm -rf /etc/my.cnf
 	cd /etc/
-	wget http://downcc.ucserver.org:8082/Files/my.cnf
-	/etc/init.d/mysql start
+	wget http://downcc.ucserver.org:8082/Files/my.cnf.percona -O /etc/my.cnf
+	/etc/init.d/mysql restart
 }
 
 function CHANGE_DNS(){
