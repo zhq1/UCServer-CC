@@ -50,10 +50,23 @@ function yum_install(){
 	wget  $downloadmirror/percona/Percona-Server-client-55-5.5.46-rel37.6.el6.x86_64.rpm
 	wget  $downloadmirror/percona/Percona-Server-server-55-5.5.46-rel37.6.el6.x86_64.rpm
 	wget $downloadmirror/percona/Percona-Server-shared-55-5.5.46-rel37.6.el6.x86_64.rpm
+	rpm -ivh Percona*.rpm --nodeps --force
+	wget $downloadmirror/percona/my1.cnf -O /etc/my.cnf
+#	chkconfig --level 2345 mysql on
+#	chkconfig --level 2345 crond on
 	rpm -ivh Percona*.rpm
 	chkconfig mysql on
 	chkconfig crond on
 	service crond start
+	service start mysql
+	mysql -uroot -e "update user set authentication_string=password('') where User='root' and Host='localhost'" mysql
+	mysql -uroot -e "flush privileges"
+	wget $downloadmirror/percona/my2.cnf -O /etc/my.cnf
+	service restart mysql
+	mysql --connect-expired-password -uroot -e "set password = password('')"
+	service restart mysql
+	service restart crond
+
 }
 
 function ioncube_install(){
