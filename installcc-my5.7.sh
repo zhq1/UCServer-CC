@@ -65,6 +65,7 @@ function yum_install(){
 	service restart mysql
 	mysql --connect-expired-password -uroot -e "set password = password('')"
 	wget $downloadmirror/percona/mysql.init.d -O /etc/init.d/mysql
+	chmod +x /etc/init.d/mysql
 	service restart mysql
 	service restart crond
 
