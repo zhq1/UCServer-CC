@@ -301,6 +301,7 @@ function asterisk_install() {
 	#Define a user called asterisk.
 	mkdir /var/run/asterisk /var/log/asterisk /var/spool/asterisk /var/lib/asterisk
 	chown -R asterisk:asterisk /var/run/asterisk /var/log/asterisk /var/lib/php /var/lib/asterisk /var/spool/asterisk/
+	chmod 777 /etc/asterisk -R
 	#Change the owner of this file to asterisk.
 	sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config 
 	setenforce 0
