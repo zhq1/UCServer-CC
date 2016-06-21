@@ -102,7 +102,7 @@ function php_install(){
 	rm -rf php56u.zip
 	wget $downloadmirror/php/php56u.zip
 	unzip php56u.zip
-	rpm -ivh php55u*.rpm
+	rpm -ivh php56u*.rpm --nodeps
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
