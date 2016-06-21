@@ -99,9 +99,9 @@ function php_install(){
 	fi
 	yum -y install sox libvpx-devel libXpm-devel t1lib-devel libxslt libxslt-devel unzip
 	cd /usr/src
-	rm -rf php55u.zip
-	wget $downloadmirror/php/php55u.zip
-	unzip php55u.zip
+	rm -rf php56u.zip
+	wget $downloadmirror/php/php56u.zip
+	unzip php56u.zip
 	rpm -ivh php55u*.rpm
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
