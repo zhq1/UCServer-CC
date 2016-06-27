@@ -85,7 +85,9 @@ function php_install(){
 	yum -y install sox libvpx-devel libXpm-devel t1lib-devel libxslt libxslt-devel unzip
 	cd /usr/src
 	rm -rf php55u.zip
+	rm -rf php55u*.rpm
 	wget $downloadmirror/php/php55u.zip
+	wget $downloadmirror/php/php55u-opcache-5.5.36-2.ius.el6.x86_64.rpm
 	unzip php55u.zip
 	rpm -ivh php55u*.rpm
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
