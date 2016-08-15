@@ -331,7 +331,8 @@ function asterisk_install() {
 	sed -i "s/#AST_GROUP/AST_GROUP/" /etc/init.d/asterisk
 
 	sed -i 's/;enable=yes/enable=no/' /etc/asterisk/cdr.conf
-
+	sed -i '/net.ipv4.ip_forward/ s/\(.*= \).*/\11/' /etc/sysctl.conf
+	/sbin/sysctl -p
 	# set AMI user
 cat > /etc/asterisk/manager.conf << EOF
 [general]
