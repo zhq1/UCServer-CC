@@ -86,7 +86,7 @@ function php_install(){
 	cd /usr/src
 	rm -rf php55u.zip
 	rm -rf php55u*.rpm
-	wget $downloadmirror/php/php55u.zip
+	wget $cdnmirror/php/php55u.zip?v=20160910
 #	wget $downloadmirror/php/php55u-opcache-5.5.36-2.ius.el6.x86_64.rpm
 	unzip php55u.zip
 	rpm -ivh php55u*.rpm
@@ -294,7 +294,7 @@ function asterisk_install() {
 	#shutdown selinux
 	cd /usr/src
 	if [ ! -e ./asterisk-$asteriskver.tar.gz ]; then
-		wget $downloadmirror/asterisk-$asteriskver.tar.gz
+		wget $cdnmirror/asterisk-$asteriskver.tar.gz
 	fi
 	tar zxf asterisk-$asteriskver.tar.gz
 	if [ $? != 0 ]; then
@@ -545,7 +545,7 @@ function astercc_install() {
 	echo -e "\e[32mStarting Install AsterCC\e[m"
 	cd /usr/src
 	if [ ! -e ./astercc-$asterccver.tar.gz ]; then
-		wget $downloadmirror/astercc-$asterccver.tar.gz -t 5
+		wget $cdnmirror/astercc-$asterccver.tar.gz -t 5
 	fi
 	tar zxf astercc-$asterccver.tar.gz
 	if [ $? != 0 ]; then
@@ -666,6 +666,7 @@ function ADD_COUNTS(){
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
+	cdnmirror=http://qiniucdn.ucserver.org
 	echo "please select the mirror you want to download from:"
 	echo "1: Shanghai Huaqiao IDC "
 	read downloadserver;
