@@ -233,9 +233,9 @@ function dahdi_install() {
 	echo -e "\e[32mStarting Install DAHDI\e[m"
 	cd /usr/src
 	if [ ! -e ./dahdi-linux-complete-$dahdiver.tar.gz ]; then
-		wget http://downcc.ucserver.org:8082/Files/dahdi-linux-complete-$dahdiver.tar.gz
+		wget $cdnmirror/Files/dahdi-linux-complete-$dahdiver.tar.gz
 		if [ ! -e ./dahdi-linux-complete-$dahdiver.tar.gz ]; then
-			wget http://downcc.ucserver.org:8082/dahdi-linux-complete-$dahdiver.tar.gz
+			wget $cdnmirror/Files/dahdi-linux-complete-$dahdiver.tar.gz
 		fi
 	fi
 	tar zxf dahdi-linux-complete-$dahdiver.tar.gz
