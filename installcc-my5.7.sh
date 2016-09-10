@@ -101,7 +101,7 @@ function php_install(){
 	cd /usr/src
 	rm -rf php55u.zip
 	rm -rf php55u*.rpm
-	wget $cdnmirror/php/php55u.zip
+	wget $cdnmirror/php/php55u.zip?v=20160910 -O php55u.zip
 #	wget $downloadmirror/php/php55u-opcache-5.5.36-2.ius.el6.x86_64.rpm
 	unzip php55u.zip
 	rpm -ivh php55u*.rpm
