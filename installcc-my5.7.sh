@@ -47,9 +47,9 @@ function yum_install(){
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
 	cd /usr/src
 	rm -rf Percona*.rpm*
-        wget  $downloadmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
-        wget  $downloadmirror/percona/Percona-Server-server-57-5.7.12-5.1.el6.x86_64.rpm
-        wget  $downloadmirror/percona/Percona-Server-shared-57-5.7.12-5.1.el6.x86_64.rpm
+        wget  $cdnmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
+        wget  $cdnmirror/percona/Percona-Server-server-57-5.7.12-5.1.el6.x86_64.rpm
+        wget  $cdnmirror/percona/Percona-Server-shared-57-5.7.12-5.1.el6.x86_64.rpm
 	rpm -ivh Percona*.rpm
 	wget $downloadmirror/percona/my1.cnf -O /etc/my.cnf
 #	chkconfig --level 2345 mysql on
@@ -101,7 +101,7 @@ function php_install(){
 	cd /usr/src
 	rm -rf php55u.zip
 	rm -rf php55u*.rpm
-	wget $downloadmirror/php/php55u.zip
+	wget $cdnmirror/php/php55u.zip
 #	wget $downloadmirror/php/php55u-opcache-5.5.36-2.ius.el6.x86_64.rpm
 	unzip php55u.zip
 	rpm -ivh php55u*.rpm
@@ -309,7 +309,7 @@ function asterisk_install() {
 	#shutdown selinux
 	cd /usr/src
 	if [ ! -e ./asterisk-$asteriskver.tar.gz ]; then
-		wget $downloadmirror/asterisk-$asteriskver.tar.gz
+		wget $cdnmirror/asterisk-$asteriskver.tar.gz
 	fi
 	tar zxf asterisk-$asteriskver.tar.gz
 	if [ $? != 0 ]; then
@@ -559,7 +559,7 @@ function astercc_install() {
 	echo -e "\e[32mStarting Install AsterCC\e[m"
 	cd /usr/src
 	if [ ! -e ./astercc-$asterccver.tar.gz ]; then
-		wget $downloadmirror/astercc-$asterccver.tar.gz -t 5
+		wget $cdnmirror/astercc-$asterccver.tar.gz -t 5
 	fi
 	tar zxf astercc-$asterccver.tar.gz
 	if [ $? != 0 ]; then
@@ -680,6 +680,7 @@ function ADD_COUNTS(){
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
+	cdnmirror=http://od9v1xxci.bkt.clouddn.com
 	echo "please select the mirror you want to download from:"
 	echo "1: Shanghai Huaqiao IDC "
 	read downloadserver;
