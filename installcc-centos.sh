@@ -46,9 +46,9 @@ function yum_install(){
 	yum -y install libaio bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
 	cd /usr/src
 	rm -rf Percona*.rpm*
-	wget  $downloadmirror/percona/Percona-Server-client-55-5.5.46-rel37.6.el6.x86_64.rpm
-	wget  $downloadmirror/percona/Percona-Server-server-55-5.5.46-rel37.6.el6.x86_64.rpm
-	wget $downloadmirror/percona/Percona-Server-shared-55-5.5.46-rel37.6.el6.x86_64.rpm
+	wget  $cdnmirror/percona/Percona-Server-client-55-5.5.46-rel37.6.el6.x86_64.rpm
+	wget  $cdnmirror/percona/Percona-Server-server-55-5.5.46-rel37.6.el6.x86_64.rpm
+	wget $cdnmirror/percona/Percona-Server-shared-55-5.5.46-rel37.6.el6.x86_64.rpm
 	rpm -ivh Percona*.rpm
 	chkconfig mysql on
 	chkconfig crond on
@@ -218,9 +218,9 @@ function dahdi_install() {
 	echo -e "\e[32mStarting Install DAHDI\e[m"
 	cd /usr/src
 	if [ ! -e ./dahdi-linux-complete-$dahdiver.tar.gz ]; then
-		wget http://downcc.ucserver.org:8082/Files/dahdi-linux-complete-$dahdiver.tar.gz
+		wget $cdnmirror/Files/dahdi-linux-complete-$dahdiver.tar.gz
 		if [ ! -e ./dahdi-linux-complete-$dahdiver.tar.gz ]; then
-			wget http://downcc.ucserver.org:8082/dahdi-linux-complete-$dahdiver.tar.gz
+			wget $cdnmirror/Files/dahdi-linux-complete-$dahdiver.tar.gz
 		fi
 	fi
 	tar zxf dahdi-linux-complete-$dahdiver.tar.gz
