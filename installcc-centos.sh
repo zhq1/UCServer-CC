@@ -324,7 +324,7 @@ cat > /etc/asterisk/manager.conf << EOF
 [general]
 enabled = yes
 port = 5038
-bindaddr = 0.0.0.0
+bindaddr = 127.0.0.1
 displayconnects=no
 
 [asterccuser]
