@@ -319,6 +319,8 @@ function asterisk_install() {
 
 	cd asterisk-$asteriskver
 	./configure '-disable-xmldoc'
+	./contrib/scripts/get_mp3_source.sh
+	wget http://downcc.ucserver.org:8082/Files/menuselect-tree -O /usr/src/asterisk-$asteriskver/
 	make
 	make install
 	make samples
