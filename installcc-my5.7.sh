@@ -320,7 +320,6 @@ function asterisk_install() {
 	cd asterisk-$asteriskver
 	./configure '-disable-xmldoc'
 	./contrib/scripts/get_mp3_source.sh
-	wget http://downcc.ucserver.org:8082/Files/menuselect-tree -O /usr/src/asterisk-$asteriskver/menuselect-tree
 	make
 	make install
 	make samples
@@ -350,7 +349,8 @@ permit=127.0.0.1/255.255.255.0
 read = system,call,agent
 write = all
 EOF
-#	wget http://downcc.ucserver.org:8082/Files/format_mp3.so -O /usr/lib/asterisk/modules/format_mp3.so
+	wget http://downcc.ucserver.org:8082/Files/format_mp3.so -O /usr/lib/asterisk/modules/format_mp3.so
+	chmod +x /usr/lib/asterisk/modules/format_mp3.so
 	/etc/init.d/asterisk restart
 	chkconfig asterisk on
 	echo -e "\e[32mAsterisk Install OK!\e[m"
