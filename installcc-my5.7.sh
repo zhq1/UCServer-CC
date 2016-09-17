@@ -320,6 +320,7 @@ function asterisk_install() {
 	cd asterisk-$asteriskver
 	./configure '-disable-xmldoc'
 	./contrib/scripts/get_mp3_source.sh
+	make menuconfig
 	make
 	make install
 	make samples
@@ -349,7 +350,7 @@ permit=127.0.0.1/255.255.255.0
 read = system,call,agent
 write = all
 EOF
-	wget $downloadmirror/format_mp3.so -O /usr/lib/asterisk/modules/format_mp3.so
+#	wget $downloadmirror/format_mp3.so -O /usr/lib/asterisk/modules/format_mp3.so
 	chmod +x /usr/lib/asterisk/modules/format_mp3.so
 	/etc/init.d/asterisk restart
 	chkconfig asterisk on
