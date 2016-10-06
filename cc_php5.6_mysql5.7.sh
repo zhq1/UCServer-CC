@@ -110,8 +110,8 @@ function php_install(){
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
 	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /etc/php.ini
 	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
-	sed -i "s/user = apache/user = asterisk/" /etc/php-fpm.d/www.conf
-	sed -i "s/group = apache/group = asterisk/" /etc/php-fpm.d/www.conf
+	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
+	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
 	chkconfig php-fpm on
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
