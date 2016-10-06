@@ -47,9 +47,9 @@ function yum_install(){
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
 	cd /usr/src
 	rm -rf Percona*.rpm*
-        wget  $downloadmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
-        wget  $downloadmirror/percona/Percona-Server-server-57-5.7.12-5.1.el6.x86_64.rpm
-        wget  $downloadmirror/percona/Percona-Server-shared-57-5.7.12-5.1.el6.x86_64.rpm
+        wget  $cdnmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
+        wget  $cdnmirror/percona/Percona-Server-server-57-5.7.12-5.1.el6.x86_64.rpm
+        wget  $cdnmirror/percona/Percona-Server-shared-57-5.7.12-5.1.el6.x86_64.rpm
 	rpm -ivh Percona*.rpm
 	wget $downloadmirror/percona/my1.cnf -O /etc/my.cnf
 #	chkconfig --level 2345 mysql on
@@ -99,12 +99,12 @@ function php_install(){
 	fi
 	yum -y install sox libvpx-devel libXpm-devel t1lib-devel libxslt libxslt-devel unzip
 	cd /usr/src
-	rm -rf php56u.zip
-	rm -rf php56u*.rpm
-	wget $downloadmirror/php/php56u.zip
-#	wget $downloadmirror/php/php56u-opcache-5.6.22-2.ius.el6.x86_64.rpm
-	unzip php56u.zip
-	rpm -ivh php56u*.rpm --nodeps
+	rm -rf php55u.zip
+	rm -rf php55u*.rpm
+	wget $cdnmirror/php/php55u.zip?v=20160910 -O php55u.zip
+#	wget $downloadmirror/php/php55u-opcache-5.5.36-2.ius.el6.x86_64.rpm
+	unzip php55u.zip
+	rpm -ivh php56u*.rpm
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
@@ -233,9 +233,9 @@ function dahdi_install() {
 	echo -e "\e[32mStarting Install DAHDI\e[m"
 	cd /usr/src
 	if [ ! -e ./dahdi-linux-complete-$dahdiver.tar.gz ]; then
-		wget http://downcc.ucserver.org:8082/Files/dahdi-linux-complete-$dahdiver.tar.gz
+		wget $cdnmirror/Files/dahdi-linux-complete-$dahdiver.tar.gz
 		if [ ! -e ./dahdi-linux-complete-$dahdiver.tar.gz ]; then
-			wget http://downcc.ucserver.org:8082/dahdi-linux-complete-$dahdiver.tar.gz
+			wget $cdnmirror/Files/dahdi-linux-complete-$dahdiver.tar.gz
 		fi
 	fi
 	tar zxf dahdi-linux-complete-$dahdiver.tar.gz
@@ -303,14 +303,13 @@ function asterisk_install() {
 	#Define a user called asterisk.
 	mkdir /var/run/asterisk /var/log/asterisk /var/spool/asterisk /var/lib/asterisk
 	chown -R asterisk:asterisk /var/run/asterisk /var/log/asterisk /var/lib/php /var/lib/asterisk /var/spool/asterisk/
-	chmod 777 /etc/asterisk -R
 	#Change the owner of this file to asterisk.
 	sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config 
 	setenforce 0
 	#shutdown selinux
 	cd /usr/src
 	if [ ! -e ./asterisk-$asteriskver.tar.gz ]; then
-		wget $downloadmirror/asterisk-$asteriskver.tar.gz
+		wget $cdnmirror/asterisk-$asteriskver.tar.gz
 	fi
 	tar zxf asterisk-$asteriskver.tar.gz
 	if [ $? != 0 ]; then
@@ -320,6 +319,8 @@ function asterisk_install() {
 
 	cd asterisk-$asteriskver
 	./configure '-disable-xmldoc'
+	./contrib/scripts/get_mp3_source.sh
+	make menuconfig
 	make
 	make install
 	make samples
@@ -339,7 +340,7 @@ cat > /etc/asterisk/manager.conf << EOF
 [general]
 enabled = yes
 port = 5038
-bindaddr = 0.0.0.0
+bindaddr = 127.0.0.1
 displayconnects=no
 
 [asterccuser]
@@ -349,7 +350,8 @@ permit=127.0.0.1/255.255.255.0
 read = system,call,agent
 write = all
 EOF
-
+#	wget $downloadmirror/format_mp3.so -O /usr/lib/asterisk/modules/format_mp3.so
+	chmod +x /usr/lib/asterisk/modules/format_mp3.so
 	/etc/init.d/asterisk restart
 	chkconfig asterisk on
 	echo -e "\e[32mAsterisk Install OK!\e[m"
@@ -560,7 +562,7 @@ function astercc_install() {
 	echo -e "\e[32mStarting Install AsterCC\e[m"
 	cd /usr/src
 	if [ ! -e ./astercc-$asterccver.tar.gz ]; then
-		wget $downloadmirror/astercc-$asterccver.tar.gz -t 5
+		wget $cdnmirror/astercc-$asterccver.tar.gz -t 5
 	fi
 	tar zxf astercc-$asterccver.tar.gz
 	if [ $? != 0 ]; then
@@ -681,6 +683,7 @@ function ADD_COUNTS(){
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
+	cdnmirror=http://qiniucdn.ucserver.org
 	echo "please select the mirror you want to download from:"
 	echo "1: Shanghai Huaqiao IDC "
 	read downloadserver;
