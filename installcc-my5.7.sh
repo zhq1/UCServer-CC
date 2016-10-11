@@ -728,6 +728,7 @@ function run() {
 	MYSQL
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
+	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
 	echo -e "\e[32mPlease email to xuke@ucserver.cc to get the license!\e[m";
 }
