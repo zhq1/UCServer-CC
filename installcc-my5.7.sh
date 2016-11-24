@@ -112,6 +112,8 @@ function php_install(){
 	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
 	sed -i "s/user = apache/user = asterisk/" /etc/php-fpm.d/www.conf
 	sed -i "s/group = apache/group = asterisk/" /etc/php-fpm.d/www.conf
+	wget $cdnmirror/php/soap.so -O /usr/lib64/php/modules/soap.so
+	wget $cdnmirror/php/40-soap.ini -O /etc/php.d/40-soap.ini
 	chkconfig php-fpm on
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
