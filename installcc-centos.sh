@@ -558,6 +558,11 @@ function astercc_install() {
 	. /tmp/.mysql_root_pw.$$
 
 	./install.sh -dbu=root -dbpw=$mysql_root_pw -amiu=$amiu -amipw=$amipw -allbydefault
+	
+	cd /usr/src
+	rm -rf /usr/src/phoneareas.sql
+	wget $cdnmirror/phoneareas.sql
+	mysql -uroot -p$mysql_root_pw astercc10</usr/src/phoneareas.sql
 	echo -e "\e[32mAsterCC Commercial Install OK!\e[m"
 }
 
