@@ -115,6 +115,7 @@ function php_install(){
 	wget $cdnmirror/php/soap.so -O /usr/lib64/php/modules/soap.so
 	wget $cdnmirror/php/40-soap.ini -O /etc/php.d/40-soap.ini
 	chkconfig php-fpm on
+	mkdir -p /var/lib/php/session
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 function redis_install(){
