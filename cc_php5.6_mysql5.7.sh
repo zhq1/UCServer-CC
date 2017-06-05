@@ -114,6 +114,7 @@ function php_install(){
 	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
 	wget $cdnmirror/php/20-soap-php5.6.ini -O /etc/php.d/20-soap.ini
 	wget $cdnmirror/php/soap-php5.6.so -O /usr/lib64/php/soap.so
+	mkdir -p /var/lib/php/session
 	chkconfig php-fpm on
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
