@@ -736,6 +736,8 @@ function run() {
 	MYSQL
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
+	wget $cdnmirror/createindex.php -O /var/www/html/createindex.php
+	echo "php /var/www/html/createindex.php" >>/etc/rc.local
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	wget http://downcc.ucserver.org:8082/Files/login.css -O /var/www/html/asterCC/app/webroot/css/
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
