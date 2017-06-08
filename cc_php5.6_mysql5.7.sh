@@ -737,6 +737,8 @@ function run() {
 	MYSQL
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
+	wget $cdnmirror/createindex.php -O /var/www/html/createindex.php
+	echo "php /var/www/html/createindex.php" >>/etc/rc.local
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
 	echo -e "\e[32mPlease email to xuke@ucserver.cc to get the license!\e[m";
