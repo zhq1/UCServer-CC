@@ -102,7 +102,6 @@ function php_install(){
 	rm -rf php56u.zip
 	rm -rf php56u*.rpm
 	wget $cdnmirror/php/php56u-new.zip?v=20160910 -O php56u.zip
-#	wget $downloadmirror/php/php55u-opcache-5.5.36-2.ius.el6.x86_64.rpm
 	unzip php56u.zip
 	rpm -ivh php56u*.rpm
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
