@@ -582,7 +582,7 @@ function astercc_install() {
 	
 	cd /usr/src
 	rm -rf /usr/src/phoneareas.sql
-	wget $cdnmirror/phoneareas.sql
+	wget $cdnmirror/phoneareas.sql?v=20160613
 	mysql -uroot -p$mysql_root_pw astercc10</usr/src/phoneareas.sql
 	echo -e "\e[32mAsterCC Commercial Install OK!\e[m"
 }
@@ -737,7 +737,7 @@ function run() {
 	/etc/init.d/php-fpm start
 	/etc/init.d/iptables stop
 	MYSQL
-	wget $cdnmirror/createindex.php -O /var/www/html/createindex.php
+	wget $cdnmirror/createindex.php -O /var/www/html/createindex.php?v=20160613
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
