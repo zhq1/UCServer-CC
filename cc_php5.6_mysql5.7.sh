@@ -690,6 +690,11 @@ function ADD_COUNTS(){
 	echo "0 1 * * * php /var/www/html/createindex.php >/dev/null 2>&1" >> /var/spool/cron/root
 
 }
+function mysql_check_boot()
+{
+        PASSWD=`cat /etc/astercc.conf |grep password|awk '{print $3}'|awk 'NR==1'`
+        echo "/usr/bin/mysqlcheck -uroot -p$PASSWD -r astercc10" >>/etc/rc.local
+}
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
@@ -740,6 +745,7 @@ function run() {
 	chkconfig --del iptables
 	wget $cdnmirror/createindex.php?v=20170613 -O /var/www/html/createindex.php
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
+	mysql_check_boot
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
 	echo -e "\e[32mPlease email to xuke@ucserver.cc to get the license!\e[m";
 }
