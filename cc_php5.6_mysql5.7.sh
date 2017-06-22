@@ -310,6 +310,12 @@ function asterisk_install() {
 	sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config 
 	setenforce 0
 	#shutdown selinux
+	cd /usr/src/
+	yum -y install libuuid-devel sqlite-devel
+	wget http://qiniucdn.ucserver.org/jansson-2.10.tar.gz -O jansson-2.10.tar.gz
+	tar -xvzf jansson-2.10.tar.gz
+	cd jansson-2.10
+	./configure && make && make install && ldconfig
 	cd /usr/src
 	if [ ! -e ./asterisk-$asteriskver.tar.gz ]; then
 		wget $cdnmirror/asterisk-$asteriskver.tar.gz
@@ -321,10 +327,8 @@ function asterisk_install() {
 	fi
 
 	cd asterisk-$asteriskver
-	yum -y install libuuid-devel sqlite-devel
-	wget http://qiniucdn.ucserver.org/jansson-2.0-11.2.x86_64.rpm -O jansson-2.0-11.2.x86_64.rpm
-	wget http://qiniucdn.ucserver.org/jansson-devel-2.0-11.2.x86_64.rpm -O jansson-devel-2.0-11.2.x86_64.rpm
-	rpm -ivh jansson-*.rpm
+	
+
 	./configure '-disable-xmldoc'
 	./contrib/scripts/get_mp3_source.sh
 	make menuconfig
