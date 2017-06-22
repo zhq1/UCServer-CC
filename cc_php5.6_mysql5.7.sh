@@ -321,6 +321,10 @@ function asterisk_install() {
 	fi
 
 	cd asterisk-$asteriskver
+	yum -y install libuuid-devel sqlite-devel
+	wget http://qiniucdn.ucserver.org/jansson-2.0-11.2.x86_64.rpm -O jansson-2.0-11.2.x86_64.rpm
+	wget http://qiniucdn.ucserver.org/jansson-devel-2.0-11.2.x86_64.rpm -O jansson-devel-2.0-11.2.x86_64.rpm
+	rpm -ivh jansson-*.rpm
 	./configure '-disable-xmldoc'
 	./contrib/scripts/get_mp3_source.sh
 	make menuconfig
@@ -706,13 +710,13 @@ function run() {
 		downloadmirror=http://downcc.ucserver.org:8082/Files;
 	fi
 #        CentOS_UPDATE
-	wget $downloadmirror/ucservercc1 -t 5
-	if [ ! -e ./ucservercc1 ]; then
+	wget $downloadmirror/ucservercc14 -t 5
+	if [ ! -e ./ucservercc14 ]; then
 		echo "failed to get version infromation,please try again"
 		exit 1;
 	fi
-	. ./ucservercc1
-	/bin/rm -rf ./ucservercc1
+	. ./ucservercc14
+	/bin/rm -rf ./ucservercc14
 	newRepo_install
 	yum_install
 	php_install
