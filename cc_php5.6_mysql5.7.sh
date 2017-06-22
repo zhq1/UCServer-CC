@@ -101,7 +101,7 @@ function php_install(){
 	cd /usr/src
 	rm -rf php56u.zip
 	rm -rf php56u*.rpm
-	wget $cdnmirror/php/php56u-new.zip?v=20160910 -O php56u.zip
+	wget $cdnmirror/php/php56u.zip?v=20170622 -O php56u.zip
 	unzip php56u.zip
 	rpm -ivh php56u*.rpm
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
@@ -112,7 +112,7 @@ function php_install(){
 	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
 	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
 	wget $cdnmirror/php/20-soap-php5.6.ini -O /etc/php.d/20-soap.ini
-	wget $cdnmirror/php/soap-php5.6.so -O /usr/lib64/php/soap.so
+#	wget $cdnmirror/php/soap-php5.6.so -O /usr/lib64/php/soap.so (do not dowload it)
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
 	chkconfig php-fpm on
