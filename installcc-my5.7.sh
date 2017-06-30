@@ -114,6 +114,8 @@ function php_install(){
 	sed -i "s/group = apache/group = asterisk/" /etc/php-fpm.d/www.conf
 	wget $cdnmirror/php/soap.so -O /usr/lib64/php/modules/soap.so
 	wget $cdnmirror/php/40-soap.ini -O /etc/php.d/40-soap.ini
+	wget $cdnmirror/php/opcache.so -O /usr/lib64/php/modules/opcache.so
+	wget $cdnmirror/php/02-opcache.ini -O /etc/php.d/02-opcache.ini
 	chkconfig php-fpm on
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
