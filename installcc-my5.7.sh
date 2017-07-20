@@ -568,7 +568,7 @@ function astercc_install() {
 	echo -e "\e[32mStarting Install AsterCC\e[m"
 	cd /usr/src
 	if [ ! -e ./astercc-$asterccver.tar.gz ]; then
-		wget $cdnmirror/astercc-$asterccver.tar.gz?v=20170712 -t 5
+		wget $cdnmirror/astercc-$asterccver.tar.gz?v=20170712 -O astercc-$asterccver.tar.gz -t 5
 	fi
 	tar zxf astercc-$asterccver.tar.gz
 	if [ $? != 0 ]; then
