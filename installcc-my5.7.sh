@@ -97,28 +97,25 @@ function php_install(){
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
-	yum -y install sox libvpx-devel libXpm-devel t1lib-devel libxslt libxslt-devel unzip
+	yum -y install sox libvpx-devel libXpm-devel t1lib-devel libxslt libxslt-devel unzip mod_dav_svn
 	cd /usr/src
-	rm -rf php55u.zip
-	rm -rf php55u*.rpm
-	wget $cdnmirror/php/php55u.zip?v=20160910 -O php55u.zip
-#	wget $downloadmirror/php/php55u-opcache-5.5.36-2.ius.el6.x86_64.rpm
-	unzip php55u.zip
-	rpm -ivh php55u*.rpm
+	rm -rf php56u.zip
+	rm -rf php56u*.rpm
+	wget $cdnmirror/php/php56u.zip?v=20171123 -O php56u.zip
+	unzip php56u.zip
+	rpm -ivh php56u*.rpm
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
 	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /etc/php.ini
 	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
-	sed -i "s/user = apache/user = asterisk/" /etc/php-fpm.d/www.conf
-	sed -i "s/group = apache/group = asterisk/" /etc/php-fpm.d/www.conf
-	wget $cdnmirror/php/soap.so -O /usr/lib64/php/modules/soap.so
-	wget $cdnmirror/php/40-soap.ini -O /etc/php.d/40-soap.ini
-	wget $cdnmirror/php/opcache.so -O /usr/lib64/php/modules/opcache.so
-	wget $cdnmirror/php/02-opcache.ini -O /etc/php.d/02-opcache.ini
-	chkconfig php-fpm on
+	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
+	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
+	wget $cdnmirror/php/20-soap-php5.6.ini -O /etc/php.d/20-soap.ini
+#	wget $cdnmirror/php/soap-php5.6.so -O /usr/lib64/php/soap.so (do not dowload it)
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
+	chkconfig php-fpm on
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 function redis_install(){
