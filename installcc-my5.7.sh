@@ -94,6 +94,7 @@ function ioncube_install(){
 
 function php_install(){
 	echo -e "\e[32mStarting Install PHP-Fpm\e[m"
+	useradd -u 500 -c "Asterisk PBX" -d /var/lib/asterisk asterisk
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
