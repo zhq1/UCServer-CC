@@ -323,7 +323,7 @@ function asterisk_install() {
 	fi
 
 	cd asterisk-$asteriskver
-	./configure '-disable-xmldoc'
+	./configure '--with-pjproject-bundled'
 	./contrib/scripts/get_mp3_source.sh
 	make menuconfig
 	make
@@ -708,13 +708,13 @@ function run() {
 		downloadmirror=http://downcc.ucserver.org:8082/Files;
 	fi
 #        CentOS_UPDATE
-	wget $downloadmirror/ucservercc1 -t 5
-	if [ ! -e ./ucservercc1 ]; then
+	wget $downloadmirror/ucservercc15 -t 5
+	if [ ! -e ./ucservercc15 ]; then
 		echo "failed to get version infromation,please try again"
 		exit 1;
 	fi
-	. ./ucservercc1
-	/bin/rm -rf ./ucservercc1
+	. ./ucservercc15
+	/bin/rm -rf ./ucservercc15
 	newRepo_install
 	yum_install
 	php_install
