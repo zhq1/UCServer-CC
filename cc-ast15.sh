@@ -705,7 +705,7 @@ function jansson_install(){
 	./configure
 	make
 	make install
-
+}
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
