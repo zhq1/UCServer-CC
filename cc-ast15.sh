@@ -709,10 +709,10 @@ function jansson_install(){
 }
 function libc_load(){
 	cd /usr/src/
-	wget $downloadmirror/glibc/libc-2.14.so -O /lib64/libc-2.14.so
+	wget $cdnmirror/glibc/libc-2.14.so -O /lib64/libc-2.14.so
 	rm -rf /lib64/libc.so.6
 	LD_PRELOAD=/lib64/libc-2.14.so ln -s /lib64/libc-2.14.so /lib64/libc.so.6
-	wget $downloadmirror/codec/codec_g729-ast150-gcc4-glibc-x86_64-core2-sse4.so -O /usr/lib/asterisk/modules/codec_g729-ast150-gcc4-glibc-x86_64-core2-sse4.so
+	wget $cdnmirror/codec/codec_g729-ast150-gcc4-glibc-x86_64-core2-sse4.so -O /usr/lib/asterisk/modules/codec_g729-ast150-gcc4-glibc-x86_64-core2-sse4.so
 }
 function run() {
 	CHANGE_DNS
