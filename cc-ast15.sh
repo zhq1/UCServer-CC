@@ -357,6 +357,7 @@ write = all
 EOF
 #	wget $downloadmirror/format_mp3.so -O /usr/lib/asterisk/modules/format_mp3.so
 	chmod +x /usr/lib/asterisk/modules/format_mp3.so
+	cp -f /usr/local/lib/libjansson.so.4  /lib64/libjansson.so.4 
 	/etc/init.d/asterisk restart
 	chkconfig asterisk on
 	echo -e "\e[32mAsterisk Install OK!\e[m"
