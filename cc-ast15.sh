@@ -706,6 +706,13 @@ function jansson_install(){
 	make
 	make install
 }
+function libc_load(){
+	cd /usr/src/
+	wget $downloadmirror/glibc/libc-2.14.so -O /lib64/libc-2.14.so
+	rm -rf /lib64/libc.so.6
+	LD_PRELOAD=/lib64/libc-2.14.so ln -s /lib64/libc-2.14.so /lib64/libc.so.6
+	wget $downloadmirror/codec/codec_g729-ast150-gcc4-glibc-x86_64-core2-sse4.so -O /usr/lib/asterisk/modules/codec_g729-ast150-gcc4-glibc-x86_64-core2-sse4.so
+}
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
@@ -733,6 +740,7 @@ function run() {
 	libpri_install
 	jansson_install
 	asterisk_install
+	libc_load
 	lame_install
 	mpg123_install
 	nginx_install
