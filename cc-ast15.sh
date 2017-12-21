@@ -45,7 +45,7 @@ function yum_install(){
 	yum -y remove asterisk*
 	yum -y install libaio bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
-	yum -y install sqlite3-devel libuuid-devel sqlite-devel
+	yum -y install libuuid-devel sqlite-devel
 	cd /usr/src
 	rm -rf Percona*.rpm*
         wget  $cdnmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
