@@ -697,6 +697,15 @@ function mysql_check_boot(){
 	PASSWD=`cat /etc/astercc.conf |grep password|awk '{print $3}'|awk 'NR==1'`
 	echo "/usr/bin/mysqlcheck -uroot -p$PASSWD -r astercc10" >>/etc/rc.local
 }
+function jansson_install(){
+	cd /usr/src
+	wget http://www.digip.org/jansson/releases/jansson-2.10.tar.gz
+	tar -xvzf jansson-2.10.tar.gz
+	cd jansson-2.10
+	./configure
+	make
+	make install
+
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
@@ -722,6 +731,7 @@ function run() {
 	fax_install
 	dahdi_install
 	libpri_install
+	jansson_install
 	asterisk_install
 	lame_install
 	mpg123_install
