@@ -358,6 +358,7 @@ write = all
 EOF
 #	wget $downloadmirror/format_mp3.so -O /usr/lib/asterisk/modules/format_mp3.so
 	chmod +x /usr/lib/asterisk/modules/format_mp3.so
+	sed -i 's/bindaddr = 0.0.0.0/bindaddr = 127.0.0.1/' /etc/asterisk/manager.conf
 	/etc/init.d/asterisk restart
 	chkconfig asterisk on
 	echo -e "\e[32mAsterisk Install OK!\e[m"
