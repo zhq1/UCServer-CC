@@ -699,6 +699,9 @@ function mysql_check_boot(){
 	PASSWD=`cat /etc/astercc.conf |grep password|awk '{print $3}'|awk 'NR==1'`
 	echo "/usr/bin/mysqlcheck -uroot -p$PASSWD -r astercc10" >>/etc/rc.local
 }
+function PHP_FPM_permisson(){
+	chown asterisk.asterisk /var/lib/php-fpm/session -R
+	}
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8082
@@ -737,6 +740,7 @@ function run() {
 	iptables_config
 	UI
 	ADD_COUNTS
+	PHP_FPM_permisson
 	echo "asterisk ALL = NOPASSWD :/etc/init.d/asterisk" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /usr/bin/reboot" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
