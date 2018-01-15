@@ -701,7 +701,7 @@ function mysql_check_boot(){
 }
 function PHP_FPM_permisson(){
 	chown asterisk.asterisk /var/lib/php-fpm/session -R
-	chown asterisk.asterisk /var/lib/ph-fpm/wsdlcache -R
+	chown asterisk.asterisk /var/lib/php-fpm/wsdlcache -R
 	}
 function run() {
 	CHANGE_DNS
