@@ -536,7 +536,7 @@ http {
           access_log   off;
           expires 15d;
         }
-	if ($http_user_agent ~ ApacheBench|WebBench|Jmeter|JoeDog|Havij|GetRight|TurnitinBot|GrabNet|masscan|mail2000|github|wget|curl) { return 404; }
+	if ($http_user_agent ~ ApacheBench|WebBench|Jmeter|JoeDog|Havij|GetRight|TurnitinBot|GrabNet|masscan|mail2000|github|Wget|curl) { return 404; }
         if ($http_user_agent ~ "Go-Ahead-Got-It") { return 404; }
         if ($http_user_agent ~ "GetWeb!") { return 404; }
         if ($http_user_agent ~ "Go!Zilla") { return 404; }
