@@ -536,19 +536,6 @@ http {
           access_log   off;
           expires 15d;
         }
-	if ($http_user_agent ~ ApacheBench|WebBench|Jmeter|JoeDog|Havij|GetRight|TurnitinBot|GrabNet|masscan|mail2000|github|Wget|curl) { return 404; }
-        if ($http_user_agent ~ "Go-Ahead-Got-It") { return 404; }
-        if ($http_user_agent ~ "GetWeb!") { return 404; }
-        if ($http_user_agent ~ "Go!Zilla") { return 404; }
-        if ($http_user_agent ~ "Download Demon") { return 404; }
-        if ($http_user_agent ~ "Indy Library") { return 404; }
-        if ($http_user_agent ~ "libwww-perl") { return 404; }
-        if ($http_user_agent ~ "Nmap Scripting Engine") { return 404; }
-        if ($http_user_agent ~ "~17ce.com") { return 404; }
-        if ($http_user_agent ~ "WebBench*") { return 404; }
-        if ($http_referer ~* 17ce.com) { return 404; }
-        if ($http_referer ~* WebBench*") { return 404; }
-        if ($http_user_agent ~ "sqlmap") { return 404; }
         location ~ .*\.(js|css)?$
         {
           expires 1d;
