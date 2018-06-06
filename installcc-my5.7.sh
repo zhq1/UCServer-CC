@@ -25,12 +25,12 @@ function newRepo_install(){
 		fi;
 
 		if [ ! -e ./ius-release-$iusver6.ius.el6.noarch.rpm ]; then
-			wget https://dl.iuscommunity.org/pub/ius/archive/Redhat/6/$arch/ius-release-$iusver6.ius.el6.noarch.rpm --no-check-certificate
+			rpm -ivh  $cdnmirror/ius-release-1.0-14.ius.el6.noarch.rpm
 		fi;
 
 		rpm -ivh epel-release-$epelver6.noarch.rpm ius-release-$iusver6.ius.el6.noarch.rpm;
 		if [ ! -e ./percona-release-0.1-3.noarch.rpm ]; then
-			wget http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
+			rpm -ivh $cdnmirror/percona-release-0.1-3.noarch.rpm
 		fi;
 		rpm -ivh percona-release-0.1-3.noarch.rpm
 	fi
