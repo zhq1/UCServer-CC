@@ -21,7 +21,7 @@ function newRepo_install(){
 	fi;
 	if [ "$version" == "release 6" ]; then
 		if [ ! -e ./epel-release-$epelver6.noarch.rpm ]; then
-			wget https://dl.iuscommunity.org/pub/ius/archive/Redhat/6/$arch/epel-release-$epelver6.noarch.rpm --no-check-certificate
+			rpm -ivh $cdnmirror/epel-release-6-5.noarch.rpm 
 		fi;
 
 		if [ ! -e ./ius-release-$iusver6.ius.el6.noarch.rpm ]; then
