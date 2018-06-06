@@ -32,7 +32,6 @@ function newRepo_install(){
 		if [ ! -e ./percona-release-0.1-3.noarch.rpm ]; then
 			rpm -ivh $cdnmirror/percona-release-0.1-3.noarch.rpm
 		fi;
-		rpm -ivh percona-release-0.1-3.noarch.rpm
 	fi
 
 	sed -i "s/mirrorlist/#mirrorlist/" /etc/yum.repos.d/ius.repo
