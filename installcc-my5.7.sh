@@ -28,7 +28,6 @@ function newRepo_install(){
 			rpm -ivh  $cdnmirror/ius-release-1.0-14.ius.el6.noarch.rpm
 		fi;
 
-		rpm -ivh epel-release-$epelver6.noarch.rpm ius-release-$iusver6.ius.el6.noarch.rpm;
 		if [ ! -e ./percona-release-0.1-3.noarch.rpm ]; then
 			rpm -ivh $cdnmirror/percona-release-0.1-3.noarch.rpm
 		fi;
