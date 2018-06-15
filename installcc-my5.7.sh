@@ -666,8 +666,8 @@ function UI() {
 	mkdir -p /usr/src/UI
 	cd /usr/src/UI
 	echo "Start setting UCServer UI"
-	wget http://downcc.ucserver.org:8082/Files/UCS-UI.tar.gz
-	wget http://downcc.ucserver.org:8082/Files/update.sh
+	wget http://downcc.ucserver.org:8083/Files/UCS-UI.tar.gz
+	wget http://downcc.ucserver.org:8083/Files/update.sh
 	bash /usr/src/UI/update.sh
 	rm -rf /usr/src/UI
 }
@@ -676,7 +676,7 @@ function MYSQL(){
 	sleep 15
 	rm -rf /etc/my.cnf
 	cd /etc/
-	wget http://downcc.ucserver.org:8082/Files/my.cnf.percona -O /etc/my.cnf
+	wget http://downcc.ucserver.org:8083/Files/my.cnf.percona -O /etc/my.cnf
 	/etc/init.d/mysql restart
 }
 
@@ -687,8 +687,8 @@ function CHANGE_DNS(){
 function ADD_COUNTS(){
 	echo "Add counts information"
 	cd /var/www/html
-	wget http://downcc.ucserver.org:8082/Files/count.php
-	wget http://downcc.ucserver.org:8082/Files/clean.php
+	wget http://downcc.ucserver.org:8083/Files/count.php
+	wget http://downcc.ucserver.org:8083/Files/clean.php
 	echo "0 * * * * php /var/www/html/count.php >/dev/null 2>&1" >> /var/spool/cron/root
 	echo "0 5 * * * php /var/www/html/clean.php >/dev/null 2>&1" >> /var/spool/cron/root
 	echo "0 1 * * * php /var/www/html/createindex.php >/dev/null 2>&1" >> /var/spool/cron/root
@@ -704,13 +704,13 @@ function PHP_FPM_permisson(){
 	}
 function run() {
 	CHANGE_DNS
-	downloadmirror=http://downcc.ucserver.org:8082
+	downloadmirror=http://downcc.ucserver.org:8083
 	cdnmirror=http://qiniucdn.ucserver.org
 	echo "please select the mirror you want to download from:"
 	echo "1: Shanghai Huaqiao IDC "
 	read downloadserver;
 	if [ "$downloadserver" == "1"  ]; then
-		downloadmirror=http://downcc.ucserver.org:8082/Files;
+		downloadmirror=http://downcc.ucserver.org:8083/Files;
 	fi
 #        CentOS_UPDATE
 	wget $downloadmirror/ucservercc1 -t 5
