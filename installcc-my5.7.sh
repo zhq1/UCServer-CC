@@ -437,6 +437,7 @@ http {
 
     sendfile        on;
     #tcp_nopush     on;
+    access_log   off;
 
     #keepalive_timeout  0;
     keepalive_timeout  65;
@@ -461,9 +462,11 @@ http {
         client_max_body_size 20M;
         index index.html index.htm index.php;
         root  /var/www/html/asterCC/app/webroot;
+	access_log   off;
 
         location / {
           index index.php;
+	  access_log   off;
 
           if (-f \$request_filename) {
             break;
@@ -537,6 +540,7 @@ http {
         }
         location ~ .*\.(js|css)?$
         {
+	  access_log   off;
           expires 1d;
         }
 
