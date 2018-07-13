@@ -301,6 +301,15 @@ function nginx_install(){
 
 	echo -e "\e[32mNginx Install OK!\e[m"
 }
+function openssl_install() {
+	echo -e "\e[32mStarting Install Openssl\e[m"
+	wget https://www.openssl.org/source/openssl-1.0.2o.tar.gz -O /usr/src/openssl-1.0.2o.tar.gz
+	tar -xvzf /usr/src/openssl-1.0.2o.tar.gz
+	cd /usr/src/openssl-1.0.2o
+	./Configure  zlib enable-camellia enable-seed enable-tlsext enable-rfc3779 enable-cms enable-md2 no-mdc2 no-rc5 no-ec2m no-gost no-srp --with-krb5-flavor=MIT  --with-krb5-dir=/usr shared linux-x86_64
+	make depend
+	make
+	make install
 
 function asterisk_install() {
 	echo -e "\e[32mStarting Install Asterisk\e[m"
@@ -731,6 +740,7 @@ function run() {
 	fax_install
 	dahdi_install
 	libpri_install
+	openssl_install
 	asterisk_install
 	lame_install
 	mpg123_install
