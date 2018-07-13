@@ -316,7 +316,7 @@ function openssl_install() {
 	rm -rf /usr/include/openssl
 	cp /usr/local/ssl/bin/openssl /usr/bin
 	ln -s /usr/local/ssl/include /usr/include/openssl
-
+}
 function asterisk_install() {
 	echo -e "\e[32mStarting Install Asterisk\e[m"
 	useradd -u 500 -c "Asterisk PBX" -d /var/lib/asterisk asterisk
