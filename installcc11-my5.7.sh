@@ -312,6 +312,10 @@ function openssl_install() {
 	make install
 	echo "/usr/local/ssl/lib">/etc/ld.so.conf.d/ssl.conf
 	ldconfig
+	rm -rf /usr/bin/openssl
+	rm -rf /usr/include/openssl
+	cp /usr/local/ssl/bin/openssl /usr/bin
+	ln -s /usr/local/ssl/include /usr/include/openssl
 
 function asterisk_install() {
 	echo -e "\e[32mStarting Install Asterisk\e[m"
