@@ -316,7 +316,7 @@ function openssl_install() {
 	rm -rf /usr/bin/openssl
 	rm -rf /usr/include/openssl
 	cp /usr/local/ssl/bin/openssl /usr/bin
-	ln -s /usr/local/ssl/include /usr/include/openssl
+	ln -s /usr/local/ssl/include/openssl /usr/include/openssl
 }
 function asterisk_install() {
 	echo -e "\e[32mStarting Install Asterisk\e[m"
@@ -339,9 +339,9 @@ function asterisk_install() {
 	fi
 
 	cd asterisk-$asteriskver
-	wget $downloadmirror/res_rtp_asterisk.patch
+	wget $cdnmirror/res_rtp_asterisk.patch
 	patch -p1 <52886_res_rtp_asterisk.patch
-	./configure --with-ssl=/usr/local/ssl
+	./configure --with-ssl=/usr/local/ssl/include/openssl/
 	./contrib/scripts/get_mp3_source.sh
 	make menuconfig
 	make
