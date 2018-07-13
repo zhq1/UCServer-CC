@@ -310,6 +310,8 @@ function openssl_install() {
 	make depend
 	make
 	make install
+	echo "/usr/local/ssl/lib">/etc/ld.so.conf.d/ssl.conf
+	ldconfig
 
 function asterisk_install() {
 	echo -e "\e[32mStarting Install Asterisk\e[m"
