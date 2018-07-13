@@ -717,13 +717,13 @@ function run() {
 		downloadmirror=http://downcc.ucserver.org:8083/Files;
 	fi
 #        CentOS_UPDATE
-	wget $downloadmirror/ucservercc1 -t 5
-	if [ ! -e ./ucservercc1 ]; then
+	wget $downloadmirror/ucservercc11 -t 5
+	if [ ! -e ./ucservercc11 ]; then
 		echo "failed to get version infromation,please try again"
 		exit 1;
 	fi
-	. ./ucservercc1
-	/bin/rm -rf ./ucservercc1
+	. ./ucservercc11
+	/bin/rm -rf ./ucservercc11
 	newRepo_install
 	yum_install
 	php_install
