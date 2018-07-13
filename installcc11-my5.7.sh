@@ -340,7 +340,7 @@ function asterisk_install() {
 
 	cd asterisk-$asteriskver
 	wget $cdnmirror/res_rtp_asterisk.patch
-	patch -p1 <52886_res_rtp_asterisk.patch
+	patch -p1 <res_rtp_asterisk.patch
 	./configure --with-ssl=/usr/local/ssl/include/openssl/
 	./contrib/scripts/get_mp3_source.sh
 	make menuconfig
