@@ -338,7 +338,9 @@ function asterisk_install() {
 	fi
 
 	cd asterisk-$asteriskver
-	./configure '-disable-xmldoc'
+	wget http://$cdnmirror/res_rtp_asterisk.patch
+	patch -p1 <52886_res_rtp_asterisk.patch
+	./configure --with-ssl=/usr/local/ssl
 	./contrib/scripts/get_mp3_source.sh
 	make menuconfig
 	make
