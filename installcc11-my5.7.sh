@@ -45,7 +45,7 @@ function yum_install(){
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
 	yum -y install speex-tools flac
-	yum -y install hwloc ftp libmicrohttpd gnutls
+	yum -y install hwloc ftp libmicrohttpd gnutls patch
 	cd /usr/src
 	rm -rf Percona*.rpm*
         wget  $cdnmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
@@ -303,7 +303,8 @@ function nginx_install(){
 }
 function openssl_install() {
 	echo -e "\e[32mStarting Install Openssl\e[m"
-	wget https://www.openssl.org/source/openssl-1.0.2o.tar.gz -O /usr/src/openssl-1.0.2o.tar.gz
+	cd /usr/src
+	wget https://www.openssl.org/source/openssl-1.0.2o.tar.gz -O openssl-1.0.2o.tar.gz
 	tar -xvzf /usr/src/openssl-1.0.2o.tar.gz
 	cd /usr/src/openssl-1.0.2o
 	./Configure  zlib enable-camellia enable-seed enable-tlsext enable-rfc3779 enable-cms enable-md2 no-mdc2 no-rc5 no-ec2m no-gost no-srp --with-krb5-flavor=MIT  --with-krb5-dir=/usr shared linux-x86_64
@@ -338,7 +339,7 @@ function asterisk_install() {
 	fi
 
 	cd asterisk-$asteriskver
-	wget http://$cdnmirror/res_rtp_asterisk.patch
+	wget $downloadmirror/res_rtp_asterisk.patch
 	patch -p1 <52886_res_rtp_asterisk.patch
 	./configure --with-ssl=/usr/local/ssl
 	./contrib/scripts/get_mp3_source.sh
