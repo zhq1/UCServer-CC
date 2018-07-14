@@ -720,6 +720,12 @@ function PHP_FPM_permisson(){
 	chown asterisk.asterisk /var/lib/php-fpm/session -R
 	chown asterisk.asterisk /var/lib/php-fpm/wsdlcache -R
 	}
+function jssip_install(){
+	wget $cdnmirror/jssip.tar.gz -O /var/www/html/asterCC/app/webroot/jssip.tar.gz
+	tar -xvzf /var/www/html/asterCC/app/webroot/jssip.tar.gz
+	chown asterisk.asterisk /var/www/html/asterCC/app/webroot/jssip
+	
+}
 function run() {
 	CHANGE_DNS
 	downloadmirror=http://downcc.ucserver.org:8083
@@ -772,6 +778,7 @@ function run() {
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
+	jssip_install
 	mysql_check_boot
 	chmod 777 /etc/astercc.conf
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
