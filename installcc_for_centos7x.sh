@@ -5,36 +5,10 @@
 # uname -r, 如果包含-pve, 需要到/usr/src执行
 # ln -s kernels/2.6.18-308.4.1.el5-x86_64/ linux 
 
-CentOS_UPDATE(){
-	yum -y update
-	ln -s /usr/src/kernel/2.6.32-573.26.1.el6.x86_64  /usr/src/kernel/2.6.32-573.el6.x86_64
-	echo -e "\e[32mCentOS Update OK!\e[m"
-}
-
 function newRepo_install(){
 	cd /usr/src
-	version=`cat /etc/issue|grep -o 'release [0-9]\+'`
-	arch=i386
-  bit=`getconf LONG_BIT`
-  if [ $bit == 64 ]; then
-		arch=x86_64
-	fi;
-	if [ "$version" == "release 6" ]; then
-		if [ ! -e ./epel-release-$epelver6.noarch.rpm ]; then
-			rpm -ivh $cdnmirror/epel-release-6-5.noarch.rpm 
-		fi;
+	
 
-		if [ ! -e ./ius-release-$iusver6.ius.el6.noarch.rpm ]; then
-			rpm -ivh  $cdnmirror/ius-release-1.0-14.ius.el6.noarch.rpm
-		fi;
-
-		if [ ! -e ./percona-release-0.1-3.noarch.rpm ]; then
-			rpm -ivh $cdnmirror/percona-release-0.1-3.noarch.rpm
-		fi;
-	fi
-
-	sed -i "s/mirrorlist/#mirrorlist/" /etc/yum.repos.d/ius.repo
-	sed -i "s/#baseurl/baseurl/" /etc/yum.repos.d/ius.repo
 }
 
 function yum_install(){
