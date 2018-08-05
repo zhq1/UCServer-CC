@@ -475,17 +475,6 @@ function get_mysql_passwd(){
 	echo mysql_root_pw=$mysql_passwd > /tmp/.mysql_root_pw.$$
 }
 
-function iptables_config(){
-	echo "start setting firewall"
-	iptables -I INPUT -p tcp --dport 80 -j ACCEPT
-	iptables -A INPUT -p udp -m udp --dport 5060 -j ACCEPT
-	iptables -A INPUT -p udp -m udp --dport 5036 -j ACCEPT
-	iptables -A INPUT -p udp -m udp --dport 4569 -j ACCEPT
-	iptables -A INPUT -p udp -m udp --dport 10000:20000 -j ACCEPT
-	iptables-save > /etc/sysconfig/iptables
-	service iptables restart
-}
-
 function UI() {
 	mkdir -p /usr/src/UI
 	cd /usr/src/UI
@@ -548,14 +537,12 @@ function run() {
 	yum_install
 	php_install
 	redis_install
-	fax_install
 	dahdi_install
 	libpri_install
 	asterisk_install
 	lame_install
 	mpg123_install
 	nginx_install
-	#ioncube_install
 	get_mysql_passwd
 	set_ami
 	/etc/init.d/asterisk restart
