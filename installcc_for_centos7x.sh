@@ -22,78 +22,16 @@ function yum_install(){
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
 	yum -y install speex-tools flac
 	yum -y install hwloc ftp libmicrohttpd gnutls
-	cd /usr/src
-	rm -rf Percona*.rpm*
-        wget  $cdnmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
-        wget  $cdnmirror/percona/Percona-Server-server-57-5.7.12-5.1.el6.x86_64.rpm
-        wget  $cdnmirror/percona/Percona-Server-shared-57-5.7.12-5.1.el6.x86_64.rpm
-	rpm -ivh Percona*.rpm
 	wget $downloadmirror/percona/my1.cnf -O /etc/my.cnf
-#	chkconfig --level 2345 mysql on
-#	chkconfig --level 2345 crond on
-	chkconfig mysql on
-	chkconfig crond on
 	service crond start
-	service mysql start
-	mysql -uroot -e "update user set authentication_string=password('') where User='root' and Host='localhost'" mysql
-	mysql -uroot -e "flush privileges"
-	wget $downloadmirror/percona/my2.cnf -O /etc/my.cnf
-	service mysql restart
-	mysql --connect-expired-password -uroot -e "set password = password('')"
-	wget $downloadmirror/percona/mysql.init.d -O /etc/init.d/mysql
-	chmod +x /etc/init.d/mysql
-	service mysql restart
-	service crond restart
-
-}
-
-function ioncube_install(){
-	echo -e "\e[32mStarting Install ioncube\e[m"
-	cd /usr/src
-        bit=`getconf LONG_BIT`
-        if [ $bit == 32 ]; then
-		if [ ! -e ./ioncube_loaders_lin_x86.tar.gz ]; then
-			wget http://downloads2.ioncube.com/loader_downloads/ioncube_loaders_lin_x86.tar.gz
-		fi
-		tar zxf ioncube_loaders_lin_x86.tar.gz
-	else
-		if [ ! -e ./ioncube_loaders_lin_x86-64.tar.gz ]; then
-			wget http://downloads2.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz
-		fi
-		tar zxf ioncube_loaders_lin_x86-64.tar.gz
-	fi
-	mv /usr/src/ioncube /usr/local/
-	sed -i "/ioncube/d"  /etc/php.ini
-	echo "zend_extension = /usr/local/ioncube/ioncube_loader_lin_5.3.so" >> /etc/php.ini
-	/etc/init.d/php-fpm start
-	echo -e "\e[32mIoncube Install OK!\e[m"
 }
 
 function php_install(){
 	echo -e "\e[32mStarting Install PHP-Fpm\e[m"
-	useradd -u 500 -c "Asterisk PBX" -d /var/lib/asterisk asterisk
-	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
-		cp /etc/php.ini.rpmnew /etc/php.ini
-	fi
-	yum -y install sox libvpx-devel libXpm-devel t1lib-devel libxslt libxslt-devel unzip mod_dav_svn GeoIP GeoIP-GeoLite-data GeoIP-GeoLite-data-extra libmcrypt 
-	cd /usr/src
-	rm -rf php56u.zip
-	rm -rf php56u*.rpm
-	wget $cdnmirror/php/php56u.zip?v=20171123 -O php56u.zip
-	unzip php56u.zip
-	rpm -ivh php56u*.rpm
-	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
-	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
-	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
-	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /etc/php.ini
-	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
-	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
-	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
-	wget $cdnmirror/php/20-soap-php5.6.ini -O /etc/php.d/20-soap.ini
-#	wget $cdnmirror/php/soap-php5.6.so -O /usr/lib64/php/soap.so (do not dowload it)
+	yum -y install php56u-xml php56u-pecl-jsonc php56u-pecl-redis php56u-gd php56u-opcache php56u-cli php56u-pecl-igbinary php56u-pecl-geoip php56u-ioncube-loader php56u-soap php56u-common php56u-pdo php56u-pecl-pthreads php56u-mbstring php56u-process php56u-pear php56u-mysqlnd php56u-fpm php56u-mcrypt
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
-	chkconfig php-fpm on
+	systemctl start php-fpm
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 function redis_install(){
