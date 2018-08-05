@@ -540,6 +540,7 @@ function run() {
 	/bin/rm -rf ./ucservercc1
 	newRepo_install
 	yum_install
+	mariaDB_install
 	php_install
 	redis_install
 	dahdi_install
