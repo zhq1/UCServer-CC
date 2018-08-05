@@ -489,14 +489,6 @@ function UI() {
 	bash /usr/src/UI/update.sh
 	rm -rf /usr/src/UI
 }
-function MYSQL(){
-	/etc/init.d/mysql stop
-	sleep 15
-	rm -rf /etc/my.cnf
-	cd /etc/
-	wget http://downcc.ucserver.org:8083/Files/my.cnf.percona -O /etc/my.cnf
-	/etc/init.d/mysql restart
-}
 
 function CHANGE_DNS(){
 	echo "nameserver 223.5.5.5">>/etc/resolv.conf
@@ -564,8 +556,6 @@ function run() {
 	/bin/rm -rf /tmp/.mysql_root_pw.$$
 	ln -s /var/lib/asterisk/moh /var/lib/asterisk/mohmp3
 	/etc/init.d/php-fpm start
-	/etc/init.d/iptables stop
-	MYSQL
 	wget $cdnmirror/createindex.php?v=20170613 -O /var/www/html/createindex.php
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
