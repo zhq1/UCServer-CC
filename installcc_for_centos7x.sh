@@ -11,6 +11,7 @@ function newRepo_install(){
 	wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 	yum install -y epel-release
 	rpm -Uvh https://rhel7.iuscommunity.org/ius-release.rpm
+	useradd -u 500 -c "Asterisk PBX" -d /var/lib/asterisk asterisk
 }
 
 function mariaDB_install(){
@@ -129,7 +130,6 @@ function nginx_install(){
 
 function asterisk_install() {
 	echo -e "\e[32mStarting Install Asterisk\e[m"
-	useradd -u 500 -c "Asterisk PBX" -d /var/lib/asterisk asterisk
 	#Define a user called asterisk.
 	mkdir /var/run/asterisk /var/log/asterisk /var/spool/asterisk /var/lib/asterisk
 	chown -R asterisk:asterisk /var/run/asterisk /var/log/asterisk /var/lib/php /var/lib/asterisk /var/spool/asterisk/
