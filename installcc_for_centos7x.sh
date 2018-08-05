@@ -13,6 +13,11 @@ function newRepo_install(){
 	rpm -Uvh https://rhel7.iuscommunity.org/ius-release.rpm
 }
 
+function mariaDB_install(){
+	yum -y install mariadb-server mariadb-client
+	systemctl start mariadb
+}
+
 function yum_install(){
 	#yum -y upgrade
 	yum -y remove php* 
