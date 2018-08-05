@@ -15,7 +15,7 @@ function newRepo_install(){
 }
 
 function mariaDB_install(){
-	yum -y install mariadb-server mariadb-client
+	yum -y install mariadb101u mariadb101u-server mariadb101u-libs mariadb101u-devel
 	systemctl start mariadb
 }
 
