@@ -28,8 +28,7 @@ function yum_install(){
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
 	yum -y install speex-tools flac
 	yum -y install hwloc ftp libmicrohttpd gnutls
-	wget $downloadmirror/percona/my1.cnf -O /etc/my.cnf
-	service crond start
+	systemctl restart crond
 }
 
 function php_install(){
