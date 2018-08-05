@@ -7,15 +7,17 @@
 
 function newRepo_install(){
 	cd /usr/src
-	
-
+	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+	wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+	yum install -y epel-release
+	rpm -Uvh https://rhel7.iuscommunity.org/ius-release.rpm
 }
 
 function yum_install(){
 	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
-	yum -y install libaio bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
+	yum -y install libaio bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel kernel-PAE-devel subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-headers
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
 	yum -y install speex-tools flac
