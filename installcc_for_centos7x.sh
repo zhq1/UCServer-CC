@@ -179,8 +179,6 @@ permit=127.0.0.1/255.255.255.0
 read = system,call,agent
 write = all
 EOF
-#	wget $downloadmirror/format_mp3.so -O /usr/lib/asterisk/modules/format_mp3.so
-	chmod +x /usr/lib/asterisk/modules/format_mp3.so
 	sed -i 's/bindaddr = 0.0.0.0/bindaddr = 127.0.0.1/' /etc/asterisk/manager.conf
 	/etc/init.d/asterisk restart
 	chkconfig asterisk on
@@ -392,7 +390,7 @@ service nginx restart
 
 function astercc_install() {
 	/etc/init.d/asterisk restart
-	echo -e "\e[32mStarting Install AsterCC\e[m"
+	echo -e "\e[32mStarting Install UCServer-CC\e[m"
 	cd /usr/src
 	if [ ! -e ./astercc-$asterccver.tar.gz ]; then
 		wget $cdnmirror/astercc-$asterccver.tar.gz?v=20180413 -O astercc-$asterccver.tar.gz -t 5
@@ -554,12 +552,10 @@ function run() {
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
 	/bin/rm -rf /tmp/.mysql_root_pw.$$
 	ln -s /var/lib/asterisk/moh /var/lib/asterisk/mohmp3
-	/etc/init.d/php-fpm start
+	systemctl restart php-fpm
 	wget $cdnmirror/createindex.php?v=20170613 -O /var/www/html/createindex.php
 	/etc/init.d/asterccd restart
-	chkconfig --del iptables
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
-	mysql_check_boot
 	chmod 777 /etc/astercc.conf
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
 	echo -e "\e[32mPlease email to xuke@ucserver.cc to get the license!\e[m";
