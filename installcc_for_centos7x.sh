@@ -129,7 +129,7 @@ function nginx_install(){
 	./configure --add-module=/usr/src/nginx-push-stream-module-master --with-http_ssl_module  --user=asterisk --group=asterisk
 	make
 	make install
-	cat /lib/systemd/system/nginx.service << EOF
+	cat > /lib/systemd/system/nginx.service << EOF
 	[Unit]
 Description=nginx
 After=network.target
