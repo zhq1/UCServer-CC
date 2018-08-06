@@ -578,6 +578,7 @@ function run() {
 	UI
 	ADD_COUNTS
 	PHP_FPM_permisson
+	mysql_check_boot
 	echo "asterisk ALL = NOPASSWD :/etc/init.d/asterisk" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /usr/bin/reboot" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
