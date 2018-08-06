@@ -33,7 +33,7 @@ function yum_install(){
 
 function php_install(){
 	echo -e "\e[32mStarting Install PHP-Fpm\e[m"
-	yum -y install php56u-xml php56u-pecl-jsonc php56u-pecl-redis php56u-gd php56u-opcache php56u-cli php56u-pecl-igbinary php56u-pecl-geoip php56u-ioncube-loader php56u-soap php56u-common php56u-pdo php56u-pecl-pthreads php56u-mbstring php56u-process php56u-pear php56u-mysqlnd php56u-fpm php56u-mcrypt
+	yum -y install php56u-xml php56u-pecl-jsonc php56u-pecl-redis php56u-gd php56u-opcache php56u-cli php-getid3 php56u-pecl-igbinary php56u-pecl-geoip php56u-ioncube-loader php56u-soap php56u-common php56u-pdo php56u-pecl-pthreads php56u-mbstring php56u-process php56u-pear php56u-mysqlnd php56u-fpm php56u-mcrypt
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
