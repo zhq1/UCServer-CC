@@ -129,12 +129,22 @@ function nginx_install(){
 	./configure --add-module=/usr/src/nginx-push-stream-module-master --with-http_ssl_module  --user=asterisk --group=asterisk
 	make
 	make install
-	wget $downloadmirror/nginx.zip
-	unzip ./nginx.zip
-	mv ./nginx /etc/init.d/
-	chmod +x /etc/init.d/nginx
-	chkconfig nginx on
-
+	cat /lib/systemd/system/nginx.service << EOF
+	[Unit]
+Description=nginx
+After=network.target
+  
+[Service]
+Type=forking
+ExecStart=/usr/local/nginx/sbin/nginx
+ExecReload=/usr/local/nginx/sbin/nginx -s reload
+ExecStop=/usr/local/nginx/sbin/nginx -s quit
+PrivateTmp=true
+  
+[Install]
+WantedBy=multi-user.target
+EOF
+	systemctl start nginx.service
 	echo -e "\e[32mNginx Install OK!\e[m"
 }
 
