@@ -46,12 +46,14 @@ function php_install(){
 	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
 	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
 	systemctl start php-fpm
+	systemctl enable php-fpm
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 
 function redis_install(){
 	yum -y install redis
 	systemctl start redis
+	systemctl enable redis
 	echo -e "\e[32mRedis server Install OK\e[m"
 }
 
@@ -97,6 +99,7 @@ function dahdi_install() {
   	echo "blacklist netjet" >> /etc/modprobe.d/dahdi.blacklist.conf
 	/etc/init.d/dahdi start
 	/usr/sbin/dahdi_genconf
+	systemctl enable dahdi
 	echo -e "\e[32mDAHDI Install OK!\e[m"
 }
 
@@ -145,6 +148,7 @@ PrivateTmp=true
 WantedBy=multi-user.target
 EOF
 	systemctl start nginx.service
+	systemctl enable nginx.service
 	echo -e "\e[32mNginx Install OK!\e[m"
 }
 
@@ -201,7 +205,7 @@ write = all
 EOF
 	sed -i 's/bindaddr = 0.0.0.0/bindaddr = 127.0.0.1/' /etc/asterisk/manager.conf
 	/etc/init.d/asterisk restart
-	chkconfig asterisk on
+	systemctl enable asterisk
 	echo -e "\e[32mAsterisk Install OK!\e[m"
 }
 
@@ -583,6 +587,7 @@ function run() {
 	/etc/init.d/asterccd restart
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	chmod 777 /etc/astercc.conf
+	systemctl enable asterccd
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
 	echo -e "\e[32mPlease email to xuke@ucserver.cc to get the license!\e[m";
 }
