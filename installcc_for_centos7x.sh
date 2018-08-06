@@ -38,7 +38,6 @@ function php_install(){
 	yum -y install php56u-xml php56u-pecl-jsonc php56u-pecl-redis php56u-gd php56u-opcache php56u-cli php56u-pecl-igbinary php56u-pecl-geoip php56u-ioncube-loader php56u-soap php56u-common php56u-pdo php56u-pecl-pthreads php56u-mbstring php56u-process php56u-pear php56u-mysqlnd php56u-fpm php56u-mcrypt
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
-	systemctl start php-fpm
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
@@ -46,6 +45,7 @@ function php_install(){
 	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
 	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
 	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
+	systemctl start php-fpm
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 
