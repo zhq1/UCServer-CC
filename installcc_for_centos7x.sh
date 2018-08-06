@@ -556,6 +556,7 @@ function run() {
 	get_mysql_passwd
 	set_ami
 	/etc/init.d/asterisk restart
+	ifconfig_change
 	astercc_install
 	nginx_conf_install
 	iptables_config
