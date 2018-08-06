@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# By Bob  #### 改为UCServer UI，更新自2015年9月8日
-
-# uname -r, 如果包含-pve, 需要到/usr/src执行
-# ln -s kernels/2.6.18-308.4.1.el5-x86_64/ linux 
-
+# By Bob  #### 改为UCServer UI，更新自2018年8月06日
+# 为了应对centos 6x即将退市，centos 7x上市，拥抱centos 7吧！
 function newRepo_install(){
 	cd /usr/src
 	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
