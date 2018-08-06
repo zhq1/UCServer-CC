@@ -106,6 +106,7 @@ function php_install(){
 	wget $cdnmirror/php/php56u.zip?v=20171123 -O php56u.zip
 	unzip php56u.zip
 	rpm -ivh php56u*.rpm
+	yum -y install php-getid3
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
