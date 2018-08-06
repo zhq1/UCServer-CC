@@ -15,6 +15,8 @@ function newRepo_install(){
 function mariaDB_install(){
 	yum -y erase mariadb-libs*
 	yum -y install mariadb101u mariadb101u-server mariadb101u-libs mariadb101u-devel
+	mv /etc/my.cnf.d/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf.bak
+	wget http://downcc.ucserver.org:8083/Files/mariadb/mariadb-server.cnf -O /etc/my.cnf.d/mariadb-server.cnf
 	systemctl start mariadb
 	systemctl enable mariadb
 }
