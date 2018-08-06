@@ -383,10 +383,15 @@ echo "net.ipv4.tcp_fin_timeout = 45" >> /etc/sysctl.conf
 echo "vm.dirty_ratio=10" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_reuse = 1" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_recycle = 1" >> /etc/sysctl.conf
-
 sysctl -p
+}
 
-service nginx restart
+function ifconfig_change() {
+	echo -e "\e[32mInstall ifconfig command from centos 6\e[m"
+	mv /sbin/ifconfig /sbin/ifconfig.bak
+	wget http://qiniucdn.ucserver.org/sbin/ifconfig -O /sbin/ifconfig
+	chmod +x /sbin/ifconfig
+	echo -e "\e[32mInstall ifconfig command OK\e[m"
 }
 
 function astercc_install() {
