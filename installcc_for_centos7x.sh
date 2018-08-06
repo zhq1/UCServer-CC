@@ -9,7 +9,7 @@ function newRepo_install(){
 	cd /usr/src
 	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 	wget -O /etc/yum.repos.d/CentOS-Base.repo $cdnmirror/Centos-7.repo
-	yum install -y epel-release
+	yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 	rpm -Uvh https://rhel7.iuscommunity.org/ius-release.rpm
 	useradd -u 500 -c "Asterisk PBX" -d /var/lib/asterisk asterisk
 }
