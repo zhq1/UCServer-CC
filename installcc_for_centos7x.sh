@@ -38,10 +38,19 @@ function php_install(){
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
 	systemctl start php-fpm
+	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
+	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
+	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
+	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /etc/php.ini
+	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
+	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
+	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
+
 function redis_install(){
 	yum -y install redis
+	systemctl start redis
 	echo -e "\e[32Redis server Install OK\e[m"
 }
 
@@ -146,7 +155,6 @@ function asterisk_install() {
 		echo "fatal: dont have valid asterisk tar package"
 		exit 1
 	fi
-
 	cd asterisk-$asteriskver
 	./configure '-disable-xmldoc'
 	./contrib/scripts/get_mp3_source.sh
