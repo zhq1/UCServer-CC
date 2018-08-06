@@ -8,7 +8,7 @@
 function newRepo_install(){
 	cd /usr/src
 	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
-	wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+	wget -O /etc/yum.repos.d/CentOS-Base.repo $cdnmirror/Centos-7.repo
 	yum install -y epel-release
 	rpm -Uvh https://rhel7.iuscommunity.org/ius-release.rpm
 	useradd -u 500 -c "Asterisk PBX" -d /var/lib/asterisk asterisk
@@ -83,7 +83,7 @@ function dahdi_install() {
 	fi
 	make install
 	make config
-  echo "blacklist netjet" >> /etc/modprobe.d/dahdi.blacklist.conf
+  	echo "blacklist netjet" >> /etc/modprobe.d/dahdi.blacklist.conf
 	/etc/init.d/dahdi start
 	/usr/sbin/dahdi_genconf
 	echo -e "\e[32mDAHDI Install OK!\e[m"
