@@ -52,7 +52,7 @@ function php_install(){
 function redis_install(){
 	yum -y install redis
 	systemctl start redis
-	echo -e "\e[32Redis server Install OK\e[m"
+	echo -e "\e[32mRedis server Install OK\e[m"
 }
 
 function mpg123_install(){
