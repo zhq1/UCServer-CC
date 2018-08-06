@@ -585,7 +585,7 @@ function run() {
 	ln -s /var/lib/asterisk/moh /var/lib/asterisk/mohmp3
 	systemctl restart php-fpm
 	wget $cdnmirror/createindex.php?v=20170613 -O /var/www/html/createindex.php
-	/etc/init.d/asterccd restart
+	systemctl restart asterccd
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	chmod 777 /etc/astercc.conf
 	systemctl enable asterccd
