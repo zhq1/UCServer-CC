@@ -588,6 +588,7 @@ function run() {
 	systemctl restart asterccd
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	chmod 777 /etc/astercc.conf
+	chmod 755 /var/lib/asterisk/sounds -R
 	systemctl enable asterccd
 	systemctl restart nginx.service
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
