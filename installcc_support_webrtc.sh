@@ -782,6 +782,7 @@ function run() {
 	jssip_install
 	mysql_check_boot
 	chmod 777 /etc/astercc.conf
+	chmod 755 /var/lib/asterisk/sounds -R
 	echo -e "\e[32mUCServer-CC installation finish!\e[m";
 	echo -e "\e[32mPlease email to xuke@ucserver.cc to get the license!\e[m";
 }
