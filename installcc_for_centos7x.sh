@@ -585,7 +585,7 @@ function run() {
 	ln -s /var/lib/asterisk/moh /var/lib/asterisk/mohmp3
 	systemctl restart php-fpm
 	wget $cdnmirror/createindex.php?v=20170613 -O /var/www/html/createindex.php
-#	sed -i "s/'id_file = /tmp/asterccc.pid'/'pid_file = /var/run/asterccc.pid'/" /etc/astercc.conf
+	sed -i '/^pid_file/c pid_file = /var/run/asterccc.pid' /etc/astercc.conf
 	systemctl restart asterccd
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	chmod 777 /etc/astercc.conf
