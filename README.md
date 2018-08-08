@@ -4,5 +4,7 @@ UCServer-CC
 升级完毕后reboot系统。之后再 git clone <br>
 UCServer-CC for centos 6.x一键安装脚本 <br>
 
-installcc_my5.7.sh ------>安装percona 5.7版本的，要求系统至少大于2GB内存才可以安装，已稳定运行!
+installcc_for_centos6x.sh ------>for centos6x的CC系统安装 <br>
+installcc_for_centos7x.sh ------>for centos7x的CC系统安装<br>
+installcc_support_webrtc.sh----->支持webrtc的CC系统安装，只支持centos 6x<br>
 
