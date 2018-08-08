@@ -105,8 +105,8 @@ function dahdi_install() {
 
 function nginx_install(){
 	echo -e "\e[32mStarting install nginx\e[m"
-	service httpd stop
-	chkconfig httpd off
+	systemctl stop httpd
+	systemctl disable httpd
 	yum -y install pcre-devel
 	cd /usr/src
 	if [ ! -e ./nginx-$nginxver.tar.gz ]; then
