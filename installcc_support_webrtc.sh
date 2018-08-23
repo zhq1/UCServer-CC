@@ -722,14 +722,14 @@ function PHP_FPM_permisson(){
 [www]
 user = asterisk
 group = asterisk
-listen = 0.0.0.0:9000
+listen = 127.0.0.1:9000
 listen.backlog = 65535
-listen.allowed_clients = 172.16.22.75,127.0.0.1
+listen.allowed_clients = 127.0.0.1
 pm = ondemand
-pm.max_children =  800
-pm.start_servers = 350
-pm.min_spare_servers = 300
-pm.max_spare_servers = 800
+pm.max_children =  100
+pm.start_servers = 30
+pm.min_spare_servers = 30
+pm.max_spare_servers = 100
 pm.process_idle_timeout = 360s
 pm.status_path = /php-status
 slowlog = /var/log/php-fpm/www-slow.log
