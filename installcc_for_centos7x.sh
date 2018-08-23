@@ -535,6 +535,28 @@ function mysql_check_boot(){
 	echo "/usr/bin/mysqlcheck -uroot -p$PASSWD -r astercc10" >>/etc/rc.local
 }
 function PHP_FPM_permisson(){
+	cat > /etc/php-fpm.d/www.conf << EOF
+[www]
+user = asterisk
+group = asterisk
+listen = 0.0.0.0:9000
+listen.backlog = 65535
+listen.allowed_clients = 172.16.22.75,127.0.0.1
+pm = ondemand
+pm.max_children =  800
+pm.start_servers = 350
+pm.min_spare_servers = 300
+pm.max_spare_servers = 800
+pm.process_idle_timeout = 360s
+pm.status_path = /php-status
+slowlog = /var/log/php-fpm/www-slow.log
+rlimit_files = 65536
+php_admin_value[error_log] = /var/log/php-fpm/www-error.log
+php_admin_flag[log_errors] = on
+php_value[session.save_handler] = files
+php_value[session.save_path]    = /var/lib/php-fpm/session
+php_value[soap.wsdl_cache_dir]  = /var/lib/php-fpm/wsdlcache
+EOF
 	chown asterisk.asterisk /var/lib/php-fpm/session -R
 	chown asterisk.asterisk /var/lib/php-fpm/wsdlcache -R
 	}
