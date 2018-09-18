@@ -54,6 +54,7 @@ function redis_install(){
 	yum -y install redis
 	systemctl start redis
 	systemctl enable redis
+	echo "echo never > /sys/kernel/mm/transparent_hugepage/enabled" >>/etc/rc.local
 	echo -e "\e[32mRedis server Install OK\e[m"
 }
 
@@ -406,6 +407,8 @@ echo "net.ipv4.tcp_fin_timeout = 45" >> /etc/sysctl.conf
 echo "vm.dirty_ratio=10" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_reuse = 1" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_recycle = 1" >> /etc/sysctl.conf
+echo "vm.overcommit_memory = 1" >>/etc/sysctl.conf
+echo "net.core.somaxconn= 1024" >>/etc/sysctl.conf
 sysctl -p
 }
 
