@@ -126,6 +126,7 @@ function redis_install(){
 	rpm -ivh $downloadmirror/redis30u-3.0.6-1.ius.el6.x86_64.rpm
 	/etc/init.d/redis start
 	chkconfig --level 2345 redis on
+	echo "echo never > /sys/kernel/mm/transparent_hugepage/enabled" >>/etc/rc.local
 	echo -e "\e[32Redis server Install OK\e[m"
 }
 function fax_install(){
@@ -575,6 +576,8 @@ echo "net.ipv4.tcp_fin_timeout = 45" >> /etc/sysctl.conf
 echo "vm.dirty_ratio=10" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_reuse = 1" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_recycle = 1" >> /etc/sysctl.conf
+echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
+echo "net.core.somaxconn= 1024" >> /etc/sysctl.conf
 
 sysctl -p
 
