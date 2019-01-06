@@ -611,6 +611,8 @@ function run() {
 	systemctl restart php-fpm
 	wget $cdnmirror/createindex.php?v=20170613 -O /var/www/html/createindex.php
 	sed -i '/^pid_file/c pid_file = /var/run/asterccc.pid' /etc/astercc.conf
+	wget $downloadmirror/mariadb/mariadb-server.cnf.new -O /etc/my.cnf.d/mariadb-server.cnf
+	systemctl restart mariadb
 	systemctl restart asterccd
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	chmod 777 /etc/astercc.conf
