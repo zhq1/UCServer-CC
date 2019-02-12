@@ -126,7 +126,13 @@ function redis_install(){
 	rpm -ivh $downloadmirror/redis30u-3.0.6-1.ius.el6.x86_64.rpm
 	/etc/init.d/redis start
 	chkconfig --level 2345 redis on
-	echo "echo never > /sys/kernel/mm/transparent_hugepage/enabled" >>/etc/rc.local
+	echo never > /sys/kernel/mm/transparent_hugepage/enabled
+	echo 511 > /proc/sys/net/core/somaxconn >>/etc/rc.local
+	sysctl -w vm.overcommit_memory=1 >/dev/null 2>&1
+	/etc/init.d/redis start
+	wget $downloadmirror/redis.init -O /etc/init.d/redis
+	chmod +x /etc/init.d/redis
+	/etc/init.d/redis restart
 	echo -e "\e[32Redis server Install OK\e[m"
 }
 function fax_install(){
