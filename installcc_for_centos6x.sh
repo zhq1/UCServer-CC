@@ -417,7 +417,7 @@ function nginx_conf_install(){
 cat >  /usr/local/nginx/conf/nginx.conf << EOF
 #user  nobody;
 worker_processes  auto;
-worker_rlimit_nofile 655350;
+worker_rlimit_nofile 65535;
 
 #error_log  logs/error.log;
 #error_log  logs/error.log  notice;
