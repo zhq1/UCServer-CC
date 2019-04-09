@@ -9,6 +9,7 @@ CentOS_UPDATE(){
 	yum -y update
 	ln -s /usr/src/kernel/2.6.32-573.26.1.el6.x86_64  /usr/src/kernel/2.6.32-573.el6.x86_64
 	echo -e "\e[32mCentOS Update OK!\e[m"
+#
 }
 
 function newRepo_install(){
