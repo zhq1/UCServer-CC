@@ -677,6 +677,8 @@ function get_mysql_passwd(){
 		fi
 	done
 	echo mysql_root_pw=$mysql_passwd > /tmp/.mysql_root_pw.$$
+	mysql -uroot -p$mysql_passwd -e "grant all on *.* to root@'127.0.0.1' identified by '$mysql_passwd'"
+
 }
 
 function iptables_config(){
