@@ -100,7 +100,7 @@ function php_install(){
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
-	yum -y install sox libvpx-devel libXpm-devel t1lib-devel libxslt libxslt-devel unzip mod_dav_svn GeoIP GeoIP-GeoLite-data GeoIP-GeoLite-data-extra libmcrypt 
+	yum -y install sox libvpx-devel libXpm-devel t1lib-devel MySQL-python libxslt libxslt-devel unzip mod_dav_svn GeoIP GeoIP-GeoLite-data GeoIP-GeoLite-data-extra libmcrypt 
 	cd /usr/src
 	rm -rf php56u.zip
 	rm -rf php56u*.rpm
