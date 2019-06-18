@@ -39,8 +39,8 @@ function php_install(){
 	yum install -y yum-utils
 	yum-config-manager --enable remi-php56
 	yum install -y php56-php-xml php56-php-pecl-jsonc php56-php-pecl-redis php56-php-gd php56-php-opcache php56-php-cli php-getid3 php56-php-pecl-igbinary php56-php-pecl-geoip php56-php-ioncube-loader php56-php-soap php56-php-common php56-php-pdo php-pecl-pthreads php56-php-mbstring php56-php-process php56-php-pear php56-php-mysqlnd php56-php-fpm php56-php-mcrypt
-	mkdir -p /var/lib/php/session
-	chown asterisk.asterisk /var/lib/php/session
+	mkdir -p /opt/remi/php56/root/var/lib/php/session
+	chown asterisk.asterisk /opt/remi/php56/root/var/lib/php/session
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /opt/remi/php56/root/etc/php.ini
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /opt/remi/php56/root/etc/php.ini
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /opt/remi/php56/root/etc/php.ini
