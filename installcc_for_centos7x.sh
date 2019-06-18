@@ -38,18 +38,18 @@ function php_install(){
 	yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 	yum install -y yum-utils
 	yum-config-manager --enable remi-php56
-	yum -y install php56-xml php56-pecl-jsonc php56-pecl-redis php56-gd php56-opcache php56-cli php-getid3 php56-pecl-igbinary php56-pecl-geoip php56-ioncube-loader php56-soap php56-common php56-pdo php56-pecl-pthreads php56-mbstring php56-process php56-pear php56-mysqlnd php56-fpm php56-mcrypt
+	yum install -y php56-php-xml php56-php-pecl-jsonc php56-php-pecl-redis php56-php-gd php56-php-opcache php56-php-cli php-getid3 php56-php-pecl-igbinary php56-php-pecl-geoip php56-php-ioncube-loader php56-php-soap php56-php-common php56-php-pdo php-pecl-pthreads php56-php-mbstring php56-php-process php56-php-pear php56-php-mysqlnd php56-php-fpm php56-php-mcrypt
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
-	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
-	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
-	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
-	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /etc/php.ini
-	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
-	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
-	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
-	systemctl start php-fpm
-	systemctl enable php-fpm
+	sed -i "s/short_open_tag = Off/short_open_tag = On/" /opt/remi/php56/root/etc/php.ini
+	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /opt/remi/php56/root/etc/php.ini
+	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /opt/remi/php56/root/etc/php.ini
+	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /opt/remi/php56/root/etc/php.ini
+	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /opt/remi/php56/root/etc/php.ini
+	sed -i "s/user = php-fpm/user = asterisk/" /opt/remi/php56/root/etc/php-fpm.d/www.conf
+	sed -i "s/group = php-fpm/group = asterisk/" /opt/remi/php56/root/etc/php-fpm.d/www.conf
+	systemctl start php56-php-fpm
+	systemctl enable php56-php-fpm
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 
