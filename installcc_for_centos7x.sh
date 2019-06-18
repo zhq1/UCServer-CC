@@ -35,7 +35,10 @@ function yum_install(){
 
 function php_install(){
 	echo -e "\e[32mStarting Install PHP-Fpm\e[m"
-	yum -y install php56u-xml php56u-pecl-jsonc php56u-pecl-redis php56u-gd php56u-opcache php56u-cli php-getid3 php56u-pecl-igbinary php56u-pecl-geoip php56u-ioncube-loader php56u-soap php56u-common php56u-pdo php56u-pecl-pthreads php56u-mbstring php56u-process php56u-pear php56u-mysqlnd php56u-fpm php56u-mcrypt
+	yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+	yum install -y yum-utils
+	yum-config-manager --enable remi-php56
+	yum -y install php56-xml php56-pecl-jsonc php56-pecl-redis php56-gd php56-opcache php56-cli php-getid3 php56-pecl-igbinary php56-pecl-geoip php56-ioncube-loader php56-soap php56-common php56-pdo php56-pecl-pthreads php56-mbstring php56-process php56-pear php56-mysqlnd php56-fpm php56-mcrypt
 	mkdir -p /var/lib/php/session
 	chown asterisk.asterisk /var/lib/php/session
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
