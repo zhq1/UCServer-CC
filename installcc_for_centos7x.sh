@@ -22,7 +22,6 @@ function mariaDB_install(){
 }
 
 function yum_install(){
-	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
 	yum -y install libaio bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel  subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-headers
@@ -38,7 +37,7 @@ function php_install(){
 	yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 	yum install -y yum-utils
 	yum-config-manager --enable remi-php56
-	yum install -y php56-php-xml php56-php-pecl-jsonc php56-php-pecl-redis php56-php-gd php56-php-opcache php56-php-cli php-getid3 php56-php-pecl-igbinary php56-php-pecl-geoip php56-php-ioncube-loader php56-php-soap php56-php-common php56-php-pdo php-pecl-pthreads php56-php-mbstring php56-php-process php56-php-pear php56-php-mysqlnd php56-php-fpm php56-php-mcrypt
+	yum install -y php56-php-xml php56-php-pecl-jsonc php56-php-pecl-redis php56-php-gd php56-php-opcache php56-php-cli php-getid3 php56-php-pecl-igbinary php56-php-pecl-geoip php56-php-ioncube-loader php56-php-soap php56-php-common php56-php-pdo php-pecl-pthreads php56-php-mbstring php56-php-process php56-php-pear php56-php-pecl-uuid php56-php-smbclient php56-php-mysqlnd php56-php-fpm php56-php-xmlrpc php56-php-pecl-crypto php56-php-mcrypt php56-php-pecl-zip 
 	mkdir -p /opt/remi/php56/root/var/lib/php/session
 	chown asterisk.asterisk /opt/remi/php56/root/var/lib/php/session
 	chown asterisk.asterisk /opt/remi/php56/root/var/lib/php/wsdlcache
