@@ -46,8 +46,10 @@ function php_install(){
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /opt/remi/php56/root/etc/php.ini
 	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /opt/remi/php56/root/etc/php.ini
 	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /opt/remi/php56/root/etc/php.ini
-	sed -i "s/user = php-fpm/user = asterisk/" /opt/remi/php56/root/etc/php-fpm.d/www.conf
-	sed -i "s/group = php-fpm/group = asterisk/" /opt/remi/php56/root/etc/php-fpm.d/www.conf
+	sed -i "s/user = apache/user = asterisk/" /opt/remi/php56/root/etc/php-fpm.d/www.conf
+	sed -i "s/group = apache/group = asterisk/" /opt/remi/php56/root/etc/php-fpm.d/www.conf
+	rm -rf /usr/bin/php
+	ln -s /opt/remi/php56/root/bin/php /usr/bin/php
 	systemctl start php56-php-fpm
 	systemctl enable php56-php-fpm
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
