@@ -42,7 +42,7 @@ function yum_install(){
 	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
-	yum -y install libaio bash iftop openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel  subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
+	yum -y install libpcap-devel libaio bash iftop openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel  subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
 	yum -y install speex-tools flac
