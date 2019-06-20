@@ -41,6 +41,7 @@ function php_install(){
 	yum install -y php56-php-xml php56-php-pecl-jsonc php56-php-pecl-redis php56-php-gd php56-php-opcache php56-php-cli php-getid3 php56-php-pecl-igbinary php56-php-pecl-geoip php56-php-ioncube-loader php56-php-soap php56-php-common php56-php-pdo php-pecl-pthreads php56-php-mbstring php56-php-process php56-php-pear php56-php-mysqlnd php56-php-fpm php56-php-mcrypt
 	mkdir -p /opt/remi/php56/root/var/lib/php/session
 	chown asterisk.asterisk /opt/remi/php56/root/var/lib/php/session
+	chown asterisk.asterisk /opt/remi/php56/root/var/lib/php/wsdlcache
 	sed -i "s/short_open_tag = Off/short_open_tag = On/" /opt/remi/php56/root/etc/php.ini
 	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /opt/remi/php56/root/etc/php.ini
 	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /opt/remi/php56/root/etc/php.ini
@@ -565,11 +566,9 @@ rlimit_files = 65536
 php_admin_value[error_log] = /var/log/php-fpm/www-error.log
 php_admin_flag[log_errors] = on
 php_value[session.save_handler] = files
-php_value[session.save_path]    = /var/lib/php-fpm/session
-php_value[soap.wsdl_cache_dir]  = /var/lib/php-fpm/wsdlcache
+php_value[session.save_path]    = /opt/remi/php56/root/var/lib/php/session
+php_value[soap.wsdl_cache_dir]  = /opt/remi/php56/root/var/lib/php/wsdlcache
 EOF
-	chown asterisk.asterisk /var/lib/php-fpm/session -R
-	chown asterisk.asterisk /var/lib/php-fpm/wsdlcache -R
 	}
 function run() {
 	CHANGE_DNS
