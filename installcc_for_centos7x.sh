@@ -546,7 +546,7 @@ function mysql_check_boot(){
 	echo "/usr/bin/mysqlcheck -uroot -p$PASSWD -r astercc10" >>/etc/rc.local
 }
 function PHP_FPM_permisson(){
-	cat > /etc/php-fpm.d/www.conf << EOF
+	cat > /opt/remi/php56/root/etc/php-fpm.d/www.conf << EOF
 [www]
 user = asterisk
 group = asterisk
