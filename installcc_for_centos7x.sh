@@ -160,6 +160,7 @@ EOF
 
 function asterisk_install() {
 	echo -e "\e[32mStarting Install Asterisk\e[m"
+	yum -y install subversion
 	#Define a user called asterisk.
 	mkdir /var/run/asterisk /var/log/asterisk /var/spool/asterisk /var/lib/asterisk
 	chown -R asterisk:asterisk /var/run/asterisk /var/log/asterisk /var/lib/php /var/lib/asterisk /var/spool/asterisk/
