@@ -29,6 +29,9 @@ function yum_install(){
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
 	yum -y install speex-tools flac
 	yum -y install hwloc ftp libmicrohttpd gnutls bzip2
+	yum -y install ntpd
+	systemctl restart ntpd
+	systemctl enable ntpd
 	systemctl restart crond
 }
 
