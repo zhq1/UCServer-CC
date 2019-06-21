@@ -48,8 +48,7 @@ function yum_install(){
 	yum -y install speex-tools flac
 	yum -y install hwloc ftp libmicrohttpd gnutls\
 	service ntpd restart
-	service start ntpd
-	chkconfig --level 2345 ntpd on
+	chkconfig ntpd on
 	cd /usr/src
 	rm -rf Percona*.rpm*
         wget  $cdnmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
