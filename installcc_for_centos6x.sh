@@ -46,7 +46,8 @@ function yum_install(){
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
 	yum -y install speex-tools flac
-	yum -y install hwloc ftp libmicrohttpd gnutls\
+	yum -y install hwloc ftp libmicrohttpd gnutls
+	yum -y install MySQL-python
 	service ntpd restart
 	chkconfig ntpd on
 	cd /usr/src
