@@ -30,6 +30,7 @@ function yum_install(){
 	yum -y install speex-tools flac
 	yum -y install hwloc ftp libmicrohttpd gnutls bzip2
 	yum -y install ntpd
+	yum -y install sox.i686
 	systemctl restart ntpd
 	systemctl enable ntpd
 	systemctl restart crond
