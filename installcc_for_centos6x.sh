@@ -573,6 +573,7 @@ echo "net.ipv4.tcp_tw_reuse = 1" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_recycle = 0" >> /etc/sysctl.conf
 echo "vm.overcommit_memory = 1" >>/etc/sysctl.conf
 echo "net.core.somaxconn= 1024" >>/etc/sysctl.conf
+echo "net.core.rmem_max= 26214400" >>/etc/sysctl.conf
 
 sysctl -p
 
