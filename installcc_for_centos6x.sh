@@ -790,7 +790,7 @@ function run() {
 	/etc/init.d/php-fpm start
 	/etc/init.d/iptables stop
 	MYSQL
-	wget $cdnmirror/createindex.php?v=20170613 -O /var/www/html/createindex.php
+	wget $cdnmirror/createindex.php?v=20191106 -O /var/www/html/createindex.php
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
