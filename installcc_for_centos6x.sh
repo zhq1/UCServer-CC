@@ -574,6 +574,13 @@ echo "net.ipv4.tcp_tw_recycle = 1" >> /etc/sysctl.conf
 echo "vm.overcommit_memory = 1" >>/etc/sysctl.conf
 echo "net.core.somaxconn= 1024" >>/etc/sysctl.conf
 echo "net.core.rmem_max= 26214400" >>/etc/sysctl.conf
+echo "net.core.netdev_max_backlog=2000" >>/etc/sysctl.conf
+echo "net.ipv4.tcp_max_syn_backlog=102400" >>/etc/sysctl.conf
+echo "net.core.somaxconn=4096" >>/etc/sysctl.conf
+echo "net.core.wmem_max = 65536000" >>/etc/sysctl.conf
+echo "net.core.wmem_default = 65536000" >>/etc/sysctl.conf
+echo "net.core.rmem_max = 65536000" >>/etc/sysctl.conf
+echo "net.core.rmem_default = 65536000" >>/etc/sysctl.conf
 
 sysctl -p
 
