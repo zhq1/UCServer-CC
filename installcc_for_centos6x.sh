@@ -48,6 +48,7 @@ function yum_install(){
 	yum -y install speex-tools flac htop
 	yum -y install hwloc ftp libmicrohttpd gnutls
 	yum -y install MySQL-python
+	yum -y install memcached
 	service ntpd restart
 	chkconfig ntpd on
 	cd /usr/src
@@ -275,6 +276,11 @@ function dahdi_install() {
 	echo -e "\e[32mDAHDI Install OK!\e[m"
 }
 
+function memcached(){
+	sed -i "s/OPTIONS/OPTIONS="-l 127.0.0.1"/" /etc/sysconfig/memcached
+	/etc/init.d/memcached start
+	chkconfig memcached on
+}
 function nginx_install(){
 	echo -e "\e[32mStarting install nginx\e[m"
 	service httpd stop
