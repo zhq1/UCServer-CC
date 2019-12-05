@@ -277,7 +277,7 @@ function dahdi_install() {
 }
 
 function memcached(){
-	sed -i "s/OPTIONS/OPTIONS="-l 127.0.0.1"/" /etc/sysconfig/memcached
+	sed -i "s/OPTIONS=\""\/OPTIONS="\"-l 127.0.0.1"/ /etc/sysconfig/memcached
 	/etc/init.d/memcached start
 	chkconfig memcached on
 }
