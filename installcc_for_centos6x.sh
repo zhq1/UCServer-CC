@@ -587,6 +587,7 @@ echo "net.core.wmem_max = 6553600" >>/etc/sysctl.conf
 echo "net.core.wmem_default = 6553600" >>/etc/sysctl.conf
 echo "net.core.rmem_max = 6553600" >>/etc/sysctl.conf
 echo "net.core.rmem_default = 6553600" >>/etc/sysctl.conf
+echo "net.ipv4.tcp_max_tw_buckets = 200000" >>/etc/sysctl.conf
 
 sysctl -p
 
