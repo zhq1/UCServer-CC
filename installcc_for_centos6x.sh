@@ -745,6 +745,7 @@ pm.start_servers = 40
 pm.min_spare_servers = 20
 pm.max_spare_servers = 60
 pm.process_idle_timeout = 360s
+pm.max_requests = 4096
 pm.status_path = /php-status
 slowlog = /var/log/php-fpm/www-slow.log
 rlimit_files = 65536
