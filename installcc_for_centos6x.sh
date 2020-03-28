@@ -807,6 +807,8 @@ function run() {
 	/etc/init.d/iptables stop
 	MYSQL
 	wget $cdnmirror/createindex.php?v=20191106 -O /var/www/html/createindex.php
+	sed -i "s/;;; load => app_senddtmf.so/load => app_senddtmf.so/g" /etc/asterisk/modules.conf
+	/etc/init.d/asterisk restart
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
