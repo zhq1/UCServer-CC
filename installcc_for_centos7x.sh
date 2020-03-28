@@ -631,6 +631,8 @@ function run() {
 	sed -i '/^pid_file/c pid_file = /var/run/asterccc.pid' /etc/astercc.conf
 	wget $downloadmirror/mariadb/mariadb-server.cnf.new -O /etc/my.cnf.d/mariadb-server.cnf
 	systemctl restart mariadb
+	sed -i "s/;;; load => app_senddtmf.so/load => app_senddtmf.so/g" /etc/asterisk/modules.conf
+	/etc/init.d/asterisk restart
 	systemctl restart asterccd
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	chmod 777 /etc/astercc.conf
