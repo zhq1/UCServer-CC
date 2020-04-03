@@ -722,7 +722,6 @@ function ADD_COUNTS(){
 	cd /var/www/html
 	wget http://downcc.ucserver.org:8083/Files/count.php
 	wget http://downcc.ucserver.org:8083/Files/clean.php
-	echo "0 * * * * php /var/www/html/count.php >/dev/null 2>&1" >> /var/spool/cron/root
 	echo "0 5 * * * php /var/www/html/clean.php >/dev/null 2>&1" >> /var/spool/cron/root
 	echo "0 1 * * * php /var/www/html/createindex.php >/dev/null 2>&1" >> /var/spool/cron/root
 	echo "0 3 * * * chown asterisk.asterisk /var/spool/asterisk/monitor >/dev/null 2>&1" >> /var/spool/cron/root
