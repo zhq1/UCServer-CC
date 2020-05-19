@@ -22,31 +22,40 @@ function mariaDB_install(){
 }
 
 function yum_install(){
-	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
-	yum -y install libaio bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel  subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-headers
+	yum -y install libpcap-devel libaio bash openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel  subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-headers
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
 	yum -y install speex-tools flac
 	yum -y install hwloc ftp libmicrohttpd gnutls bzip2
+	yum -y install ntpd
+	yum -y install sox.i686
+	systemctl restart ntpd
+	systemctl enable ntpd
 	systemctl restart crond
 }
 
 function php_install(){
 	echo -e "\e[32mStarting Install PHP-Fpm\e[m"
-	yum -y install php56u-xml php56u-pecl-jsonc php56u-pecl-redis php56u-gd php56u-opcache php56u-cli php-getid3 php56u-pecl-igbinary php56u-pecl-geoip php56u-ioncube-loader php56u-soap php56u-common php56u-pdo php56u-pecl-pthreads php56u-mbstring php56u-process php56u-pear php56u-mysqlnd php56u-fpm php56u-mcrypt
-	mkdir -p /var/lib/php/session
-	chown asterisk.asterisk /var/lib/php/session
-	sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini 
-	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /etc/php.ini 
-	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /etc/php.ini 
-	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /etc/php.ini
-	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /etc/php.ini
-	sed -i "s/user = php-fpm/user = asterisk/" /etc/php-fpm.d/www.conf
-	sed -i "s/group = php-fpm/group = asterisk/" /etc/php-fpm.d/www.conf
-	systemctl start php-fpm
-	systemctl enable php-fpm
+	yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+	yum install -y yum-utils
+	yum-config-manager --enable remi-php56
+	yum install -y php56-php-xml php56-php-pecl-jsonc php56-php-pecl-redis php56-php-gd php56-php-opcache php56-php-cli php-getid3 php56-php-pecl-igbinary php56-php-pecl-geoip php56-php-ioncube-loader php56-php-soap php56-php-common php56-php-pdo php-pecl-pthreads php56-php-mbstring php56-php-process php56-php-pear php56-php-pecl-uuid php56-php-smbclient php56-php-mysqlnd php56-php-fpm php56-php-xmlrpc php56-php-pecl-crypto php56-php-mcrypt php56-php-pecl-zip 
+	mkdir -p /opt/remi/php56/root/var/lib/php/session
+	chown asterisk.asterisk /opt/remi/php56/root/var/lib/php/session
+	chown asterisk.asterisk /opt/remi/php56/root/var/lib/php/wsdlcache
+	sed -i "s/short_open_tag = Off/short_open_tag = On/" /opt/remi/php56/root/etc/php.ini
+	sed -i "s/memory_limit = 16M /memory_limit = 128M /" /opt/remi/php56/root/etc/php.ini
+	sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 40M /" /opt/remi/php56/root/etc/php.ini
+	sed -i "s/post_max_size = 8M/post_max_size = 40M/" /opt/remi/php56/root/etc/php.ini
+	sed -i '/^error_reporting/c error_reporting = E_ALL & ~E_DEPRECATED' /opt/remi/php56/root/etc/php.ini
+	sed -i "s/user = apache/user = asterisk/" /opt/remi/php56/root/etc/php-fpm.d/www.conf
+	sed -i "s/group = apache/group = asterisk/" /opt/remi/php56/root/etc/php-fpm.d/www.conf
+	rm -rf /usr/bin/php
+	ln -s /opt/remi/php56/root/bin/php /usr/bin/php
+	systemctl start php56-php-fpm
+	systemctl enable php56-php-fpm
 	echo -e "\e[32mPHP-Fpm Install OK!\e[m"
 }
 
@@ -155,6 +164,7 @@ EOF
 
 function asterisk_install() {
 	echo -e "\e[32mStarting Install Asterisk\e[m"
+	yum -y install subversion
 	#Define a user called asterisk.
 	mkdir /var/run/asterisk /var/log/asterisk /var/spool/asterisk /var/lib/asterisk
 	chown -R asterisk:asterisk /var/run/asterisk /var/log/asterisk /var/lib/php /var/lib/asterisk /var/spool/asterisk/
@@ -406,10 +416,18 @@ echo "net.ipv4.ip_local_port_range = 1024 65000" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_fin_timeout = 45" >> /etc/sysctl.conf
 echo "vm.dirty_ratio=10" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_reuse = 1" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_tw_recycle = 1" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_tw_recycle = 0" >> /etc/sysctl.conf
 echo "vm.overcommit_memory = 1" >>/etc/sysctl.conf
 echo "net.core.somaxconn= 1024" >>/etc/sysctl.conf
-sysctl -p
+echo "net.core.rmem_max= 26214400" >>/etc/sysctl.conf
+echo "net.core.netdev_max_backlog=2000" >>/etc/sysctl.conf
+echo "net.ipv4.tcp_max_syn_backlog=102400" >>/etc/sysctl.conf
+echo "net.core.somaxconn=4096" >>/etc/sysctl.conf
+echo "net.core.wmem_max = 6553600" >>/etc/sysctl.conf
+echo "net.core.wmem_default = 6553600" >>/etc/sysctl.conf
+echo "net.core.rmem_max = 6553600" >>/etc/sysctl.conf
+echo "net.core.rmem_default = 6553600" >>/etc/sysctl.conf
+echo "net.ipv4.tcp_max_tw_buckets = 200000" >>/etc/sysctl.conf
 }
 
 function ifconfig_change() {
@@ -540,30 +558,28 @@ function mysql_check_boot(){
 	echo "/usr/bin/mysqlcheck -uroot -p$PASSWD -r astercc10" >>/etc/rc.local
 }
 function PHP_FPM_permisson(){
-	cat > /etc/php-fpm.d/www.conf << EOF
+	cat > /opt/remi/php56/root/etc/php-fpm.d/www.conf << EOF
 [www]
 user = asterisk
 group = asterisk
 listen = 127.0.0.1:9000
 listen.backlog = 65535
 listen.allowed_clients = 127.0.0.1
-pm = ondemand
+pm = dynamic
 pm.max_children =  100
-pm.start_servers = 30
-pm.min_spare_servers = 30
-pm.max_spare_servers = 100
+pm.start_servers = 40
+pm.min_spare_servers = 20
+pm.max_spare_servers = 60
 pm.process_idle_timeout = 360s
 pm.status_path = /php-status
-slowlog = /var/log/php-fpm/www-slow.log
+slowlog = /opt/remi/php56/root/var/log/php-fpm/www-slow.log
 rlimit_files = 65536
-php_admin_value[error_log] = /var/log/php-fpm/www-error.log
+php_admin_value[error_log] = /opt/remi/php56/root/var/log/php-fpm/www-error.log
 php_admin_flag[log_errors] = on
 php_value[session.save_handler] = files
-php_value[session.save_path]    = /var/lib/php-fpm/session
-php_value[soap.wsdl_cache_dir]  = /var/lib/php-fpm/wsdlcache
+php_value[session.save_path]    = /opt/remi/php56/root/var/lib/php/session
+php_value[soap.wsdl_cache_dir]  = /opt/remi/php56/root/var/lib/php/wsdlcache
 EOF
-	chown asterisk.asterisk /var/lib/php-fpm/session -R
-	chown asterisk.asterisk /var/lib/php-fpm/wsdlcache -R
 	}
 function run() {
 	CHANGE_DNS
@@ -615,6 +631,8 @@ function run() {
 	sed -i '/^pid_file/c pid_file = /var/run/asterccc.pid' /etc/astercc.conf
 	wget $downloadmirror/mariadb/mariadb-server.cnf.new -O /etc/my.cnf.d/mariadb-server.cnf
 	systemctl restart mariadb
+	sed -i "s/;;; load => app_senddtmf.so/load => app_senddtmf.so/g" /etc/asterisk/modules.conf
+	/etc/init.d/asterisk restart
 	systemctl restart asterccd
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html
 	chmod 777 /etc/astercc.conf

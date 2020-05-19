@@ -42,11 +42,15 @@ function yum_install(){
 	#yum -y upgrade
 	yum -y remove php* 
 	yum -y remove asterisk*
-	yum -y install libaio bash iftop openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel  subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
+	yum -y install libpcap-devel libaio bash iftop openssl openssh-server openssh-clients tcpdump wget mlocate openvpn ghostscript mailx cpan crontabs glibc gcc-c++ libtermcap-devel newt newt-devel ncurses ncurses-devel libtool libxml2-devel kernel-devel  subversion flex libstdc++-devel libstdc++  unzip sharutils openssl-devel make kernel-header
 	yum -y install numactl perl perl-Module-Pluggable perl-Pod-Escapes perl-Pod-Simple perl-libs perl-version
 	yum -y install sqlite-devel libuuid-devel pciutils samba cifs-utils
-	yum -y install speex-tools flac
+	yum -y install speex-tools flac htop
 	yum -y install hwloc ftp libmicrohttpd gnutls
+	yum -y install MySQL-python
+	yum -y install memcached
+	service ntpd restart
+	chkconfig ntpd on
 	cd /usr/src
 	rm -rf Percona*.rpm*
         wget  $cdnmirror/percona/Percona-Server-client-57-5.7.12-5.1.el6.x86_64.rpm
@@ -100,7 +104,7 @@ function php_install(){
 	if [ -e /etc/php.ini.rpmnew -a ! -e /etc/php.ini ]; then
 		cp /etc/php.ini.rpmnew /etc/php.ini
 	fi
-	yum -y install sox libvpx-devel libXpm-devel t1lib-devel MySQL-python libxslt libxslt-devel unzip mod_dav_svn GeoIP GeoIP-GeoLite-data GeoIP-GeoLite-data-extra libmcrypt 
+	yum -y install libmemcached10 sox libvpx-devel libXpm-devel t1lib-devel MySQL-python libxslt libxslt-devel unzip mod_dav_svn GeoIP GeoIP-GeoLite-data GeoIP-GeoLite-data-extra libmcrypt 
 	cd /usr/src
 	rm -rf php56u.zip
 	rm -rf php56u*.rpm
@@ -272,6 +276,11 @@ function dahdi_install() {
 	echo -e "\e[32mDAHDI Install OK!\e[m"
 }
 
+function memcached(){
+	sed -i "s/OPTIONS=\""\/OPTIONS="\"-l 127.0.0.1"/ /etc/sysconfig/memcached
+	/etc/init.d/memcached start
+	chkconfig memcached on
+}
 function nginx_install(){
 	echo -e "\e[32mStarting install nginx\e[m"
 	service httpd stop
@@ -567,9 +576,18 @@ echo "net.ipv4.ip_local_port_range = 1024 65000" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_fin_timeout = 45" >> /etc/sysctl.conf
 echo "vm.dirty_ratio=10" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_reuse = 1" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_tw_recycle = 1" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_tw_recycle = 0" >> /etc/sysctl.conf
 echo "vm.overcommit_memory = 1" >>/etc/sysctl.conf
 echo "net.core.somaxconn= 1024" >>/etc/sysctl.conf
+echo "net.core.rmem_max= 26214400" >>/etc/sysctl.conf
+echo "net.core.netdev_max_backlog=2000" >>/etc/sysctl.conf
+echo "net.ipv4.tcp_max_syn_backlog=102400" >>/etc/sysctl.conf
+echo "net.core.somaxconn=4096" >>/etc/sysctl.conf
+echo "net.core.wmem_max = 6553600" >>/etc/sysctl.conf
+echo "net.core.wmem_default = 6553600" >>/etc/sysctl.conf
+echo "net.core.rmem_max = 6553600" >>/etc/sysctl.conf
+echo "net.core.rmem_default = 6553600" >>/etc/sysctl.conf
+echo "net.ipv4.tcp_max_tw_buckets = 200000" >>/etc/sysctl.conf
 
 sysctl -p
 
@@ -704,7 +722,6 @@ function ADD_COUNTS(){
 	cd /var/www/html
 	wget http://downcc.ucserver.org:8083/Files/count.php
 	wget http://downcc.ucserver.org:8083/Files/clean.php
-	echo "0 * * * * php /var/www/html/count.php >/dev/null 2>&1" >> /var/spool/cron/root
 	echo "0 5 * * * php /var/www/html/clean.php >/dev/null 2>&1" >> /var/spool/cron/root
 	echo "0 1 * * * php /var/www/html/createindex.php >/dev/null 2>&1" >> /var/spool/cron/root
 	echo "0 3 * * * chown asterisk.asterisk /var/spool/asterisk/monitor >/dev/null 2>&1" >> /var/spool/cron/root
@@ -721,12 +738,13 @@ group = asterisk
 listen = 127.0.0.1:9000
 listen.backlog = 65535
 listen.allowed_clients = 127.0.0.1
-pm = ondemand
+pm = dynamic
 pm.max_children =  100
-pm.start_servers = 30
-pm.min_spare_servers = 30
-pm.max_spare_servers = 100
+pm.start_servers = 40
+pm.min_spare_servers = 20
+pm.max_spare_servers = 60
 pm.process_idle_timeout = 360s
+pm.max_requests = 4096
 pm.status_path = /php-status
 slowlog = /var/log/php-fpm/www-slow.log
 rlimit_files = 65536
@@ -778,6 +796,7 @@ function run() {
 	UI
 	ADD_COUNTS
 	PHP_FPM_permisson
+	memcached
 	echo "asterisk ALL = NOPASSWD :/etc/init.d/asterisk" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /usr/bin/reboot" >> /etc/sudoers
 	echo "asterisk ALL = NOPASSWD: /sbin/shutdown" >> /etc/sudoers
@@ -786,7 +805,9 @@ function run() {
 	/etc/init.d/php-fpm start
 	/etc/init.d/iptables stop
 	MYSQL
-	wget $cdnmirror/createindex.php?v=20170613 -O /var/www/html/createindex.php
+	wget $cdnmirror/createindex.php?v=20191106 -O /var/www/html/createindex.php
+	sed -i "s/;;; load => app_senddtmf.so/load => app_senddtmf.so/g" /etc/asterisk/modules.conf
+	/etc/init.d/asterisk restart
 	/etc/init.d/asterccd restart
 	chkconfig --del iptables
 	rm -rf /var/www/html/asterCC/app/webroot/js/fckeditor/editor/filemanager/connectors/test.html

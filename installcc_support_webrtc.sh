@@ -581,10 +581,18 @@ echo "net.ipv4.ip_local_port_range = 1024 65000" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_fin_timeout = 45" >> /etc/sysctl.conf
 echo "vm.dirty_ratio=10" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_tw_reuse = 1" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_tw_recycle = 1" >> /etc/sysctl.conf
-echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
-echo "net.core.somaxconn= 1024" >> /etc/sysctl.conf
-
+echo "net.ipv4.tcp_tw_recycle = 0" >> /etc/sysctl.conf
+echo "vm.overcommit_memory = 1" >>/etc/sysctl.conf
+echo "net.core.somaxconn= 1024" >>/etc/sysctl.conf
+echo "net.core.rmem_max= 26214400" >>/etc/sysctl.conf
+echo "net.core.netdev_max_backlog=2000" >>/etc/sysctl.conf
+echo "net.ipv4.tcp_max_syn_backlog=102400" >>/etc/sysctl.conf
+echo "net.core.somaxconn=4096" >>/etc/sysctl.conf
+echo "net.core.wmem_max = 6553600" >>/etc/sysctl.conf
+echo "net.core.wmem_default = 6553600" >>/etc/sysctl.conf
+echo "net.core.rmem_max = 6553600" >>/etc/sysctl.conf
+echo "net.core.rmem_default = 6553600" >>/etc/sysctl.conf
+echo "net.ipv4.tcp_max_tw_buckets = 200000" >>/etc/sysctl.conf
 sysctl -p
 
 service nginx restart
@@ -736,11 +744,11 @@ group = asterisk
 listen = 127.0.0.1:9000
 listen.backlog = 65535
 listen.allowed_clients = 127.0.0.1
-pm = ondemand
+pm = dynamic
 pm.max_children =  100
-pm.start_servers = 30
-pm.min_spare_servers = 30
-pm.max_spare_servers = 100
+pm.start_servers = 40
+pm.min_spare_servers = 20
+pm.max_spare_servers = 60
 pm.process_idle_timeout = 360s
 pm.status_path = /php-status
 slowlog = /var/log/php-fpm/www-slow.log
